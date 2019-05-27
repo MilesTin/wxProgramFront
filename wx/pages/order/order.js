@@ -23,8 +23,6 @@ Page({
         money:'5.00'
 
       }
-
-
     ],
     completedOrder: true,
     incompletedOrder: true,

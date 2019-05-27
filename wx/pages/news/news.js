@@ -1,8 +1,8 @@
 var util = require('../../utils/util.js');
 const app = getApp();
 var normalPage = 1; //综合排序
-var timePage = 1; //时间最新
-var pricePage = 1; //价格优先
+var timePage = 0; //时间最新
+var pricePage = 0; //价格优先
 var resultLength = 10; //每次加载10个数据项
 var loadLength; //每次加载list的长度
 var bottomFlag = 0; //用于实现底部showToast只触发一次
@@ -21,26 +21,31 @@ Page({
       "完成时间",
       "价格优先"
     ],
-    orderList: [],
+    normalList: [],
+    timeList:[],
+    priceList:[],
     navbarActiveIndex: 0 //当前处在的页面
   },
   onLoad: function() {
     var that = this;
     that.computeScrollViewHeight();
-    that.loadOrder();
+    that.loadOrder('',normalPage,'','');
   },
-  onShow: function() {},
+  onShow: function() {
 
+  },
   /**
    * 点击导航栏
    */
   onNavBarTap: function(event) {
+    var that=this;
     // 获取点击的navbar的index
     let navbarTapIndex = event.currentTarget.dataset.navbarIndex
     // 设置data属性中的navbarActiveIndex为当前点击的navbar
     this.setData({
       navbarActiveIndex: navbarTapIndex
     })
+    that.judgePage();
     console.log(event.currentTarget.dataset.navbarIndex)
   },
 
@@ -74,11 +79,17 @@ Page({
       })
     })
   },
-  textInput: function(e) {},
+  textInput: function(e) {
+    var that=this;
+    console.log(e.detail.value)
+    that.setData({
+      inputValue:e.detail.value
+    })
+  },
 
 
 
-  loadOrder( /*search, page, orderByTime, orderByPrice*/ ) {
+  loadOrder( search, page, orderByTime, orderByPrice) {
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -87,10 +98,10 @@ Page({
     wx.request({
       url: app.globalData.url + '/order/search',
       data: {
-        //search: '',//可有可无
-        page: normalPage,
-        //orderByTime:'', //1 or - 1 可有可无，1表示最新，- 1表示最久远, 创建日期
-        //orderByPrice:'', //同上，1为价格最高排序
+        search: search,//可有可无
+        page: page,
+        orderByTime:orderByTime, //1 or - 1 可有可无，1表示最新，- 1表示最久远, 创建日期
+        orderByPrice:orderByPrice, //同上，1为价格最高排序
       },
       method: "GET",
       header: {
@@ -100,7 +111,7 @@ Page({
         console.log(res);
         console.log(res.data.results.length);
         //将第一次加载的results长度赋值给loadLength;用于loadMoreOrder的判断;
-        /*if (res.data.results.length>0){
+        /*if (res.data.results.length>0 ){
           that.setData({
             have_order: true
           })
@@ -135,8 +146,9 @@ Page({
         });
         bottomFlag = 1;
       } else {}
-    } else { //仍然有数据项可以加载
-      that.loadOrder();
+    } else { //仍然有数据项可以加载,要进行页面的判断
+      //that.loadOrder(inputValue,page,orderByTime,orderByPrice);
+      that.judgePage();
     }
   },
   /*getOrderInfo(e){//获得某个订单的更多信息，需要登录
@@ -202,6 +214,33 @@ Page({
         }
       }
     })
+  },
+  //调用loadMore的页面判断
+  judgePage(){
+    var that=this;
+    console.log(that.data.navbarActiveIndex)
+    var index=that.data.navbarActiveIndex;
+    var search=that.data.inputValue;
+    switch (index) {
+      //综合排序
+      case 0:
+        normalPage++;
+        that.loadOrder(search,normalPage,'','');
+        break;
+      //时间有限
+      case 1:
+        timePage++;
+        that.loadOrder(search,timePage,1,'');
+        break;
+      //价格优先
+        case 3:
+        pricePage++;
+        that.loadOrder(search,pricePage,'',1);
+        break;
+      default:
+        //
+        break;
+    }
   }
 
 })

@@ -44,20 +44,19 @@ Page({
           wx.request({
             url: app.globalData.url + '/account/login',
             data: {
-              appid: 'wxc84b45f5439e7c25',
-              secret: '8b23fb5594a94e3443ec77ffd2cdf185',
               code: res.code,
-              head_img: app.globalData.userInfo.avataUrl,
+              head_img: app.globalData.userInfo.avatarUrl,
               wx_name: app.globalData.userInfo.nickName
             },
             method: "GET",
             header: {
               'content-type': 'application/json', // 默认值
+              'Cookie': wx.getStorageSync('sessionid'),
             },
             success: function (res) {
-              console.log(res);
+              console.log(res.header["Set-Cookie"]);
               try {
-                wx.setStorageSync('sessionid', res.cookies[0])
+                wx.setStorageSync('sessionid', res.header["Set-Cookie"])
               } catch (e) {
                 //do something when catch error
                 console.log("设置sessionid缓存失败")
