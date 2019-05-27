@@ -1,8 +1,8 @@
 var util = require('../../utils/util.js');
 const app = getApp();
-var normalPage = 1;//综合排序
-var timePage = 1;//时间最新
-var pricePage = 1;//价格优先
+var normalPage = 1; //综合排序
+var timePage = 1; //时间最新
+var pricePage = 1; //价格优先
 var resultLength = 10; //每次加载10个数据项
 var loadLength; //每次加载list的长度
 var bottomFlag = 0; //用于实现底部showToast只触发一次
@@ -22,7 +22,7 @@ Page({
       "价格优先"
     ],
     orderList: [],
-    navbarActiveIndex:0 //当前处在的页面
+    navbarActiveIndex: 0 //当前处在的页面
   },
   onLoad: function() {
     var that = this;
@@ -78,7 +78,7 @@ Page({
 
 
 
-  loadOrder( /*search, page, orderByTime, orderByPrice*/) {
+  loadOrder( /*search, page, orderByTime, orderByPrice*/ ) {
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -97,6 +97,7 @@ Page({
         'content-type': 'application/json', // 默认值
       },
       success(res) {
+        console.log(res);
         console.log(res.data.results.length);
         //将第一次加载的results长度赋值给loadLength;用于loadMoreOrder的判断;
         /*if (res.data.results.length>0){
@@ -137,5 +138,70 @@ Page({
     } else { //仍然有数据项可以加载
       that.loadOrder();
     }
+  },
+  /*getOrderInfo(e){//获得某个订单的更多信息，需要登录
+    console.log(e.currentTarget.dataset.index);
+      var that=this;
+    var index = e.currentTarget.dataset.index;
+      wx.request({
+        url: app.globalData.url +'/order/getOrder',
+        data: {
+          sessionid: wx.getStorageSync('sessionid'),
+          orderid: that.data.orderList[index].orderid
+        },
+        method: 'GET',
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success(res){
+          console.log(res);
+        }
+      })
+      wx.navigateTo({
+        url: '/pages/news/orderInfo/orderInfo?orderList='+that.data.orderList[e.currentTarget.dataset.index],
+      })
+  },*/
+  receiveOrder(e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    console.log(that.data.orderList[index].orderid);
+    wx.showModal({
+      title: '消息',
+      content: '您是否确认接受此订单',
+      success(res) {
+        if (res.confirm) { //用户确认接单
+          wx.request({
+            url: app.globalData.url + '/order/receiveOrder',
+            data: {
+              sessionid: wx.getStorageSync('sessionid'),
+              orderid: that.data.orderList[index].orderid
+            },
+            method: 'GET',
+            header: {
+              'Content-Type': 'application/json'
+            },
+            success(res) {
+              console.log(res);
+              wx.showToast({
+                title: '接单成功',
+                icon: 'success',
+                duration: 1000,
+                mask: true,
+              })
+            },
+            fail() {
+              wx.showToast({
+                title: '接单失败',
+                icon: 'fail',
+                duration: 1000,
+                mask: true,
+              })
+            }
+          })
+        } else if (res.cancel) { //用户取消接单
+        }
+      }
+    })
   }
+
 })

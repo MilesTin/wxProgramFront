@@ -47,7 +47,8 @@ Page({
               appid: 'wxc84b45f5439e7c25',
               secret: '8b23fb5594a94e3443ec77ffd2cdf185',
               code: res.code,
-              head_img: app.globalData.userInfo.avataUrl
+              head_img: app.globalData.userInfo.avataUrl,
+              wx_name: app.globalData.userInfo.nickName
             },
             method: "GET",
             header: {

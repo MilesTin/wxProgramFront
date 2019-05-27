@@ -7,7 +7,8 @@
     "pages/news/news",
     "pages/order/order",
     "pages/order/detail/detail",
-    "pages/order/send/send"
+    "pages/order/send/send",
+    "pages/news/orderInfo/orderInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
