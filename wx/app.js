@@ -47,8 +47,10 @@ App({
             url : this.globalData.localUrl + '/account/login',
             data: {
               code: res.code,
+
               head_img:this.globalData.userInfo.avatarUrl,
               wx_name:this.globalData.userInfo.nickName
+
             },
             method: "GET",
             header: {

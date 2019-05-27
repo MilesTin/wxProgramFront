@@ -7,8 +7,9 @@
     "pages/mine/mine",
     "pages/news/news",
     "pages/order/order",
+
     "pages/order/detail/detail"
-    
+
   ],
   "window": {
     "backgroundTextStyle": "light",
