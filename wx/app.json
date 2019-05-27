@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/order/send/send",
     "pages/welcome/welcome",
-    "pages/index/index",
     "pages/logs/logs",
+    "pages/index/index",
     "pages/mine/mine",
     "pages/news/news",
     "pages/order/order",
-    "pages/order/detail/detail",
-    "pages/order/send/send"
+    "pages/order/detail/detail"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
