@@ -82,7 +82,7 @@ Page({
   },
   formSubmit:function(e){
     console.log(e);
-    /*wx.request({
+    wx.request({
       url: app.globalData.url +'/order/sendOrder',
       data: {
         sessionid:wx.getStorageSync('sessionid'),
@@ -111,7 +111,7 @@ Page({
           }
         })
       }
-    })*/
+    })
     wx.navigateTo({
       url: '/pages/order/order',
     })

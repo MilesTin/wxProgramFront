@@ -11,10 +11,16 @@
 .send-list {
   position: relative;
   width: 700rpx;
-  height: 180rpx;
+  height: 150rpx;
   margin: 20rpx auto;
   display: flex;
   align-items: center;
+}
+.send-largeList{
+  position: relative;
+  margin: 20rpx auto;
+  width: 700rpx;
+  height: 300rpx;
 }
 .send-listPart1 {
   background-color: #e0f2f1;
@@ -38,6 +44,9 @@
 
 .send-listPart6 {
   background-color: #ffffff;
+}
+.send-listPart7 {
+  background-color: #F0F8FF;
 }
 .send-infomation{
   position: relative;
@@ -67,6 +76,9 @@
 .send-text6{
   color: #d1cfcf;
 }
+.send-text7{
+  color: #00bfff;
+}
 .send-line{
   position: absolute;
   width: 5rpx;
@@ -91,7 +103,9 @@
 .send-line6{
   background-color: #98d8d4;
 }
-
+.send-line7{
+  background-color: #87cefa;
+}
 .send-input{
   position: absolute;
   width: 380rpx;
@@ -119,6 +133,9 @@
 .send-input6{
   color: #d1cfcf;
 }
+.send-input7{
+  color: #00bfff;
+}
 .shortInput{
   width:200rpx;
 }
@@ -143,11 +160,11 @@ font-size: 45rpx;
   align-items: center;
 }
 radio{
-  margin-left: 30rpx;
+  margin-left: 20rpx;
 }
 
 textarea{
   width: 700rpx;
-  height: 180rpx;
+  height: 300rpx;
 }
 
