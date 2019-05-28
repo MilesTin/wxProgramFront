@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/testApi/testApi",
     "pages/order/send/send",
     "pages/welcome/welcome",
     "pages/logs/logs",

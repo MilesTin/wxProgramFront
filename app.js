@@ -1,8 +1,13 @@
 //app.js
 App({
+  globalData: {
+    userInfo: null,
+    url: 'http://129.28.140.83:81/matesHelps',
+    localUrl: 'http://127.0.0.1:8000'
+  },
   onLaunch: function() {
     var that = this;
-
+    
     //登录
 
     this.globalData.localUrl = 'http://127.0.0.1:8000';
@@ -29,11 +34,7 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null,
-    url: 'http://129.28.140.83:81/matesHelps',
-    localUrl:'http://127.0.0.1:8000'
-  },
+
   doLogin() {
     wx.login({
       success: res => {
@@ -43,8 +44,8 @@ App({
           code: res.code,
 
             head_img: this.globalData.userInfo.avatarUrl,
-              // wx_name:this.globalData.userInfo.nickName
-          wx_name: "nobody🐷",
+              wx_name:this.globalData.userInfo.nickName
+          // wx_name: "nobody🐷",
             };
         console.log(data);
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
