@@ -1,0 +1,174 @@
+/* pages/mine/mine.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.mine-container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mine-bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.mine-userInfo{
+  position: relative;
+  top:100rpx;
+  width: 300rpx;
+  height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mine-userAvatarUrl{
+  position: absolute;
+  top:50rpx;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  overflow:hidden; 
+}
+.mine-userNickName{
+  position: absolute;
+  top:200rpx;
+}
+.mine-userCredit{
+  position: relative;
+  top:80rpx;
+  width: 400rpx;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.mine-creditStar{
+  position: absolute;
+  left: 100rpx;
+  height: 40rpx;
+  overflow: hidden;
+}
+.mine-creditText{
+  position: absolute;
+  left: 0;
+}
+.mine-creditPiont{
+  position: absolute;
+  right: 0;
+}
+.mine-star1{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.mine-star2{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 40rpx;
+}
+.mine-star3{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 80rpx;
+}
+.mine-star4{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 120rpx;
+}
+.mine-star5{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 160rpx;
+}
+.star{
+  height: 100%;
+  width: 100%;
+}
+.mine-frame{
+  position: absolute;
+  bottom: 0rpx;
+  width: 700rpx;
+  height: 500rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius:1.5%;
+  border-top-right-radius:1.5%;
+  box-shadow:3px 3px 10px rgba(0, 0, 0, 0.2);  
+}
+.mine-list{
+  width: 600rpx;
+  height: 500rpx;
+}
+.mine-navigator{
+  position: relative;
+  display: flex;
+  flex-direction:row;
+  align-items: center; 
+  width: 600rpx;
+  height: 125rpx;
+}
+.mine-icon{
+ border-radius: 50%;
+ width: 35rpx;
+ height: 35rpx;
+ background-color: #00a0e9;
+}
+.mine-icon1{
+ border-radius: 50%;
+ width: 35rpx;
+ height: 35rpx;
+ background-color: #00a0e9;
+}
+.mine-icon2{
+ border-radius: 50%;
+ width: 35rpx;
+ height: 35rpx;
+ background-color: #00796b;
+}
+.mine-icon3{
+ border-radius: 50%;
+ width: 35rpx;
+ height: 35rpx;
+ background-color: #7e57c2;
+}
+.mine-icon4{
+ border-radius: 50%;
+ width: 35rpx;
+ height: 35rpx;
+ background-color: #64b5f6;
+}
+.mine-text{
+position: absolute;
+font-family: "思源雅黑";
+font-size: 35rpx;
+left: 70rpx;
+}
+.mine-arrow{
+width: 8px;
+height: 8px;
+border-top: 1px solid black;
+border-right: 1px solid black;
+position: absolute;
+right: 20rpx;
+transform: rotate(45deg);
+}

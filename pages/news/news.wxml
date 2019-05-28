@@ -1,0 +1,100 @@
+<view class="container">
+  <!-- 导航栏 -->
+  <view class='news-search'>
+    <image class='news-searchIcon' src='/img/news/search.png'></image>
+    <view class='news-inputView'>
+      <input class='news-input' type="text" value="{{inputValue}}" cursor='-1' bindinput='textInput'></input>
+    </view>
+  </view>
+  <view class="navbar">
+    <block wx:for="{{navbarTitle}}" wx:key="index">
+      <view class="navbar-item {{navbarActiveIndex === index ? 'navbar-item-active' : ''}}" data-navbar-index="{{index}}" catchtap="onNavBarTap">
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="movie-content-wrapper">
+    <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish" style='height:100%'>
+      <swiper-item>
+        <block>
+          <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px" bindscrolltolower='loadMoreOrder'>
+            <block wx:for="{{orderList}}" wx:for-item="item" wx:key="orderid">
+              <view class='box-list' bindtap='receiveOrder' data-index='{{index}}'>
+                <view class='box-idText'>
+                  <text class='box-id'>{{item.received_pos}}{{item.kuaidi}}快递</text>
+                </view>
+                <view class='box-status'>
+                  <view class='box-statusText'>截止时间：{{item.expireDateTime}}</view>
+                  <view class='box-statusText1'>代取费用：{{item.money}}元</view>
+                </view>
+                <view class='box-time'>
+                  <view class='box-timeIcon'>
+                    <image class='box-clock' src='/img/news/clock.png'></image>
+                  </view>
+                  <view class='box-timeDate'>
+                    <text>{{item.createTime}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>
+      <!-- <swiper-item>
+        <block>
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
+            <block wx:for="{{recyclingBox}}" wx:for-item="item" wx:for-index="idx">
+              <view class='box-list'>
+                <view class='box-idText'>
+                  <text class='box-id'>{{item.express}}</text>
+                </view>
+                <view class='box-status'>
+                  <view class='box-statusText'>待回收</view>
+                </view>
+                <view class='box-time'>
+                  <view class='box-timeIcon'>
+                    <image class='box-clock' src='/img/news/clock.png'></image>
+                  </view>
+                  <view class='box-timeDate'>
+                    <text>{{item.date}}</text>
+                  </view>
+                  <view class='box-timeDate'>
+                    <text>{{item.day}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>
+      <swiper-item>
+        <block>
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
+            <block wx:for="{{recyclingBox}}" wx:for-item="item" wx:for-index="idx">
+              <view class='box-list'>
+                <view class='box-idText'>
+                  <text class='box-id'>{{item.express}}</text>
+                </view>
+                <view class='box-status'>
+                  <view class='box-statusText'>截止时间：{{item.deadline}}</view>
+                  <view class='box-statusText'>代取费用：{{item.charge}}元</view>
+                </view>
+                <view class='box-time'>
+                  <view class='box-timeIcon'>
+                    <image class='box-clock' src='/img/news/clock.png'></image>
+                  </view>
+                  <view class='box-timeDate'>
+                    <text>{{item.date}}</text>
+                  </view>
+                  <view class='box-timeDate'>
+                    <text>{{item.day}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>-->
+    </swiper>
+  </view>
+</view>

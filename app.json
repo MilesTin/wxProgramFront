@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/order/send/send",
+    "pages/welcome/welcome",
+    "pages/logs/logs",
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/news/news",
+    "pages/order/order",
+
+    "pages/order/detail/detail"
+
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "color": "#515151",
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/img/tabBar/index.png",
+        "selectedIconPath": "/img/tabBar/index1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "/img/tabBar/order.png",
+        "selectedIconPath": "/img/tabBar/order1.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "iconPath": "/img/tabBar/news.png",
+        "selectedIconPath": "/img/tabBar/news1.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "/img/tabBar/mine.png",
+        "selectedIconPath": "/img/tabBar/mine1.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
