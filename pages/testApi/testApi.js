@@ -107,7 +107,43 @@ Page({
   //       console.log(res);
   //     }
   // });
-    //
+    //取消订单
+    // header2['Cookie'] = wx.getStorageSync("sessionid");
+    // wx.request({
+    //   url: app.globalData.localUrl + "/order/cancelOrder",
+    //   header:header2,
+    //   data:{
+    //     orderid:'1234',
+    //   },
+    //   success:function(res){
+    //     console.log(res);
+
+    //   }
+    // })
+    //完成订单
+    // header2['Cookie'] = wx.getStorageSync('sessionid');
+
+    // console.log(wx.getStorageSync('sessionid'));
+    // wx.request({
+    //   url: app.globalData.localUrl + "/order/orderComplete",
+    //   header:header2,
+    //   data:{
+    //     orderid:'1234',
+    //   },
+    //   success:function(res){
+    //     console.log(res.data);
+
+    //   }
+    // })
+    //我的订单接口
+    header2['Cookie'] = wx.getStorageSync('sessionid');
+    wx.request({
+      url: app.globalData.localUrl + "/account/myOrder",
+      header:header2,
+      success:function(res){
+        console.log(res.data);
+      }
+    })
   },
 
   /**
