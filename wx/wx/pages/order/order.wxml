@@ -1,0 +1,77 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+  <!-- 导航栏 -->
+  <view class="navbar">
+    <block wx:for="{{navbarTitle}}" wx:key="index">
+      <view class="navbar-item {{navbarActiveIndex === index ? 'navbar-item-active' : ''}}" data-navbar-index="{{index}}" catchtap="onNavBarTap">
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="movie-content-wrapper">
+    <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish" style='height:100%'>
+      <swiper-item>
+        <block wx:if="{{!completedOrder}}">
+          <view class='box-container'>
+            <image class='box-blankIcon' src='/img/order/blank.png'></image>
+            <text class='box-blankText'>您目前暂无订单哦~</text>
+          </view>
+        </block>
+        <block wx:if="{{completedOrder}}">
+          <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px">
+            <block wx:for="{{completedOrderList}}" wx:for-item="item" wx:for-index="idx">
+              <view class='box-list'>
+                <image class='order-img' src='{{item.head_img}}'></image>
+                <view class='order-name'>
+                  <text class='order-wxName'>{{item.wx_name}}</text>
+                  <view class='order-arrow'></view>
+                </view>
+                <view class='order-express'>
+                  <text>{{item.pos}}</text>
+                  <text>x{{item.count}}</text>
+                </view>
+                <view class='order-line'></view>
+                <view class='order-money'>共{{item.count}}件快递，实付
+                  <text class='order-moneyText'>¥{{item.money}}</text>
+                </view>
+                <view class='order-button'><button class="btn btn1">取消订单</button><button class="btn btn2">确认收货</button></view>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>
+      <swiper-item>
+        <block wx:if="{{!having_order}}">
+          <view class='box-container'>
+            <image class='box-blankIcon' src='/img/order/blank.png'></image>
+            <text class='box-blankText'>您目前暂无订单哦~</text>
+          </view>
+        </block>
+        <block wx:if="{{having_order}}">
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
+            <block wx:for="{{recyclingBox}}" wx:for-item="item" wx:for-index="idx">
+              <view class='box-list'>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>
+      <swiper-item>
+        <block wx:if="{{!had_order}}">
+          <view class='box-container'>
+            <image class='box-blankIcon' src='/img/order/blank.png'></image>
+            <text class='box-blankText'>您目前暂无订单哦~</text>
+          </view>
+        </block>
+        <block wx:if="{{had_order}}">
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
+            <block wx:for="{{recyclingBox}}" wx:for-item="item" wx:for-index="idx">
+              <view class='box-list'>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

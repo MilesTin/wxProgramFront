@@ -1,29 +1,5 @@
 //app.js
 App({
-<<<<<<< HEAD
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-=======
   onLaunch: function() {
     var that = this;
 
@@ -40,9 +16,7 @@ App({
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo //将getUserInfo设为全局变量
               this.doCheckSession();
-              //this.doLogin();
               //that.doCheckSession();
->>>>>>> 提交
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -55,9 +29,6 @@ App({
     })
   },
   globalData: {
-<<<<<<< HEAD
-    userInfo: null
-=======
     userInfo: null,
     url: 'http://129.28.140.83:81/matesHelps',
   },
@@ -71,20 +42,19 @@ App({
           wx.request({
             url: this.globalData.url + '/account/login',
             data: {
+              appid: 'wxc84b45f5439e7c25',
+              secret: '8b23fb5594a94e3443ec77ffd2cdf185',
               code: res.code,
-              head_img:this.globalData.userInfo.avatarUrl,
-              wx_name: this.globalData.userInfo.nickName
-              //wx_name:"nobody",
+              head_img:this.globalData.userInfo.avataUrl
             },
             method: "GET",
             header: {
               'content-type': 'application/json', // 默认值
-              'Cookie': wx.getStorageSync('sessionid')
             },
             success: function(res) {
               console.log(res);
               try {
-                wx.setStorageSync('sessionid', res.header["Set-Cookie"])
+                wx.setStorageSync('sessionid', res.cookies[0])
               } catch (e) {
                 //do something when catch error
                 console.log("设置sessionid缓存失败")
@@ -122,6 +92,5 @@ App({
       // 无skey，作为首次登录
       that.doLogin();
     }
->>>>>>> 提交
   }
 })

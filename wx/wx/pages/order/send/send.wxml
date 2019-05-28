@@ -1,0 +1,69 @@
+<!--pages/order/send/send.wxml-->
+<view class='send-container'>
+  <form bindsubmit="formSubmit">
+    <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px">
+      <view class='send-list send-listPart1'>
+        <view class='send-infomation'>
+          <view class='send-text send-text1'>截止时间</view>
+          <view class='send-line send-line1'></view>
+          <view class='send-input send-input1'>
+            <input class='shortInput' placeholder="N" placeholder-style='color:#98d8d4' type='digit' maxlength='5' name='expireTime'></input>小时</view>
+        </view>
+      </view>
+      <view class='send-list send-listPart2'>
+        <view class='send-infomation'>
+          <view class='send-text send-text2'>价值</view>
+          <view class='send-input2'>
+            <radio-group class="radio-group" name='value' bindchange="radioChange">
+              <label class="radio" wx:for="{{items}}">
+                {{item.value}}
+                <radio value="{{item.name}}" checked="{{item.checked}}" />
+              </label>
+            </radio-group>
+          </view>
+        </view>
+      </view>
+      <view class='send-list send-listPart3'>
+        <view class='send-infomation'>
+          <view class='send-text send-text3'>酬劳</view>
+          <view class='send-line send-line3'></view>
+          <view class='send-input send-input3'>
+            <input class='shortInput' placeholder="M" placeholder-style='color:#b3adad' type='digit' maxlength='5' name='money'></input>元</view>
+        </view>
+      </view>
+      <view class='send-list send-listPart4'>
+        <view class='send-infomation'>
+          <view class='send-text send-text4'>送达位置</view>
+          <view class='send-line send-line4'></view>
+          <view class='send-input send-input4'>
+            <input class='longInput' placeholder="西园七舍" placeholder-style='color:#bf9df1' type='text' maxlength='15' name='received_pos'></input>
+          </view>
+        </view>
+      </view>
+      <view class='send-list send-listPart5'>
+        <view class='send-infomation'>
+          <view class='send-text send-text5'>快递位置</view>
+          <view class='send-line send-line5'></view>
+          <view class='send-input send-input5'>
+            <input class='longInput' placeholder="快递街" placeholder-style='color:#e0b9b9' type='text' maxlength='15' name='pos'></input>
+          </view>
+        </view>
+      </view>
+            <view class='send-list send-listPart7'>
+        <view class='send-infomation'>
+          <view class='send-text send-text7'>订单号</view>
+          <view class='send-line send-line7'></view>
+          <view class='send-input send-input7'>
+            <input class='longInput' placeholder="NaN" placeholder-style='color:#87cefa' type='number' maxlength='20' name='orderid'></input>
+          </view>
+        </view>
+      </view>
+      <view class='send-largeList send-listPart6'>
+        <view class='send-textarea'>
+          <textarea name='hidden_info' placeholder="请输入您的取件号、手机号、姓名" maxlength='300'></textarea>
+        </view>
+      </view>
+    </scroll-view>
+    <button class='btn' form-type="submit">确认</button>
+  </form>
+</view>

@@ -1,0 +1,170 @@
+/* pages/order/send/send.wxss */
+
+.send-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f6f7f8;
+  padding-top: 10rpx;
+}
+
+.send-list {
+  position: relative;
+  width: 700rpx;
+  height: 150rpx;
+  margin: 20rpx auto;
+  display: flex;
+  align-items: center;
+}
+.send-largeList{
+  position: relative;
+  margin: 20rpx auto;
+  width: 700rpx;
+  height: 300rpx;
+}
+.send-listPart1 {
+  background-color: #e0f2f1;
+}
+
+.send-listPart2 {
+  background-color: #e3f2fd;
+}
+
+.send-listPart3 {
+  background-color: #eceff1;
+}
+
+.send-listPart4 {
+  background-color: #ede7f6;
+}
+
+.send-listPart5 {
+  background-color: #f6e7f0;
+}
+
+.send-listPart6 {
+  background-color: #ffffff;
+}
+.send-listPart7 {
+  background-color: #F0F8FF;
+}
+.send-infomation{
+  position: relative;
+  margin-left: 50rpx;
+  width: 650rpx;
+  display: flex;
+  align-items: center;
+}
+.send-text{
+  width:200rpx;
+}
+.send-text1 {
+  color: #318d88;
+}
+.send-text2 {
+  color: #1976d2;
+}
+.send-text3{
+  color: #000000;
+}
+.send-text4{
+  color: #7e57c2;
+}
+.send-text5{
+  color: #ec5aa5;
+}
+.send-text6{
+  color: #d1cfcf;
+}
+.send-text7{
+  color: #00bfff;
+}
+.send-line{
+  position: absolute;
+  width: 5rpx;
+  height: 50rpx;
+  left: 250rpx;
+}
+.send-line1{
+  background-color: #98d8d4;
+}
+.send-line2{
+  background-color: #bbdefb;
+}
+.send-line3{
+  background-color: #b3adad;
+}
+.send-line4{
+  background-color: #bf9df1;
+}
+.send-line5{
+  background-color: #e0b9b9;
+}
+.send-line6{
+  background-color: #98d8d4;
+}
+.send-line7{
+  background-color: #87cefa;
+}
+.send-input{
+  position: absolute;
+  width: 380rpx;
+  height: 50rpx;
+  left: 260rpx;
+  display: flex;
+  align-items: center;
+}
+.send-input1 {
+  color: #318d88;
+}
+.send-input2 {
+  width: 400rpx;
+  color: #1976d2;
+}
+.send-input3{
+  color: #000000;
+}
+.send-input4{
+  color: #7e57c2;
+}
+.send-input5{
+  color: #ec5aa5;
+}
+.send-input6{
+  color: #d1cfcf;
+}
+.send-input7{
+  color: #00bfff;
+}
+.shortInput{
+  width:200rpx;
+}
+.longInput{
+  width:400rpx;
+}
+button::after{ 
+	border: none; 
+  border-radius: 0;
+}
+.btn {
+position: fixed;
+bottom: 0;
+border-radius: 0;
+width: 100%;
+background-color: #7e57c2;
+color: #ffffff;
+font-size: 45rpx;
+}
+.radio-group{
+  display: flex;
+  align-items: center;
+}
+radio{
+  margin-left: 20rpx;
+}
+
+textarea{
+  width: 700rpx;
+  height: 300rpx;
+}
+

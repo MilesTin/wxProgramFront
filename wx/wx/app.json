@@ -1,17 +1,4 @@
 {
-<<<<<<< HEAD
-  "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
-}
-=======
   "pages": [
     "pages/welcome/welcome",
     "pages/index/index",
@@ -20,9 +7,7 @@
     "pages/news/news",
     "pages/order/order",
     "pages/order/detail/detail",
-    "pages/order/send/send",
-    "pages/news/orderInfo/orderInfo",
-    "pages/mine/verification/verification"
+    "pages/order/send/send"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -63,4 +48,3 @@
   },
   "sitemapLocation": "sitemap.json"
 }
->>>>>>> 提交

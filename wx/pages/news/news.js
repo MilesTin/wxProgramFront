@@ -1,11 +1,15 @@
 var util = require('../../utils/util.js');
 const app = getApp();
-var normalPage = 1; //综合排序
+var normalPage = 0; //综合排序
 var timePage = 0; //时间最新
 var pricePage = 0; //价格优先
 var resultLength = 10; //每次加载10个数据项
-var loadLength; //每次加载list的长度
-var bottomFlag = 0; //用于实现底部showToast只触发一次
+var normalLoadLength,timeLoadLength,priceLoadLength; //每次加载list的长度
+var narmalBottomFlag = 0; //用于实现底部showToast只触发一次
+var timeBottomFlag = 0;
+var priceBottomFlag = 0;
+var timeFlag=0;//记录第一次打开最新页面
+var priceFlag=0;//记录第一次打开价格页面
 Page({
 
   /**
@@ -18,7 +22,7 @@ Page({
     navbarTitle: [
       "综合排序",
       "最新",
-      "完成时间",
+      //"完成时间",
       "价格优先"
     ],
     normalList: [],
@@ -29,7 +33,10 @@ Page({
   onLoad: function() {
     var that = this;
     that.computeScrollViewHeight();
-    that.loadOrder('',normalPage,'','');
+    var orderList=that.data.normalList;
+    normalPage=normalPage+1;
+    that.loadOrder(orderList,0,'',normalPage,'','');
+    that.loadOrder(orderList, 0, '', 2, '', '');
   },
   onShow: function() {
 
@@ -45,8 +52,20 @@ Page({
     this.setData({
       navbarActiveIndex: navbarTapIndex
     })
-    that.judgePage();
-    console.log(event.currentTarget.dataset.navbarIndex)
+
+    //判断是否第一次打开最新或者价格页面
+    if (timeFlag == 0 && navbarTapIndex==1){
+      var orderList = that.data.timeList;
+      timePage=timePage+1;
+      that.loadOrder(orderList, 1,'', timePage, '', '');
+      timeFlag=1;
+    }
+    if (priceFlag == 0 && navbarTapIndex == 2) {
+      var orderList = that.data.priceList;
+      pricePage = pricePage + 1;
+      that.loadOrder(orderList, 2, '', pricePage, '', '');
+      priceFlag=1;
+    }
   },
 
   /**
@@ -88,8 +107,8 @@ Page({
   },
 
 
-
-  loadOrder( search, page, orderByTime, orderByPrice) {
+  //参数说明：列表（即对不同的列表push），index(判断赋值给哪个列表)
+  loadOrder(orderList,index,search, page, orderByTime, orderByPrice) {
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -109,27 +128,36 @@ Page({
       },
       success(res) {
         console.log(res);
-        console.log(res.data.results.length);
         //将第一次加载的results长度赋值给loadLength;用于loadMoreOrder的判断;
         /*if (res.data.results.length>0 ){
           that.setData({
             have_order: true
           })
         }*/
-        loadLength = res.data.results.length;
-        var orderList = that.data.orderList;
+        //loadLength = res.data.results.length;
         for (var i = 0; i < res.data.results.length; i++) {
           orderList.push(res.data.results[i])
           //字符串格式处理
           orderList[i].createTime = util.formatTime(new Date(orderList[i].createTime));
           orderList[i].expireDateTime = util.formatTime(new Date(orderList[i].expireDateTime));
           orderList[i].money = (parseFloat(orderList[i].money)).toFixed(2);
-          //console.log(orderList[i].money);
         }
-        that.setData({
-          orderList
-        })
-        console.log(orderList);
+        if(index==0){
+          that.setData({
+            normalList: orderList
+          })
+        }
+        else if(index==1){
+          that.setData({
+            timeList: orderList
+          })
+        }
+        else if (index == 1) {
+          that.setData({
+            priceList: orderList
+          })
+        }
+ 
       },
       complete() {
         wx.hideLoading();
@@ -227,7 +255,7 @@ Page({
         normalPage++;
         that.loadOrder(search,normalPage,'','');
         break;
-      //时间有限
+      //时间优先
       case 1:
         timePage++;
         that.loadOrder(search,timePage,1,'');

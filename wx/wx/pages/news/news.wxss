@@ -48,8 +48,8 @@
   padding: 20rpx 0px;
 }
 .navbar-item-active{
-  /*transition: all 0.3s;*/
-  /*border-bottom: 5rpx solid #1976d2;*/
+  transition: all 0.3s;
+  border-bottom: 5rpx solid #1976d2;
   color: #1976d2;
 }
 

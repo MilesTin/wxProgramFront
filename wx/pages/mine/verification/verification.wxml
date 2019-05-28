@@ -1,0 +1,6 @@
+<!--pages/mine/verification/verification.wxml-->
+<block wx:if="{{loadImg}}">
+<image src='{{img}}'></image>
+</block>
+<input value='{{verification}}' bindinput='textInput'></input>
+<button bindtap='verify'>确认</button>

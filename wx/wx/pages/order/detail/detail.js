@@ -1,20 +1,18 @@
-// pages/mine/mine.js
+// pages/order/detail/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    width:0,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      width:200
-    })
+
   },
 
   /**
@@ -64,10 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  navigateToVerification(){
-    wx.navigateTo({
-      url: '/pages/mine/verification/verification',
-    })
   }
 })

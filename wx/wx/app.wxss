@@ -5,9 +5,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-<<<<<<< HEAD
-  padding: 200rpx 0;
-=======
->>>>>>> 提交
   box-sizing: border-box;
 } 

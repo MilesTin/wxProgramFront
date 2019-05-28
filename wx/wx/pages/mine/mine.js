@@ -64,10 +64,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  navigateToVerification(){
-    wx.navigateTo({
-      url: '/pages/mine/verification/verification',
-    })
   }
 })

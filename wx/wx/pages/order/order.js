@@ -9,8 +9,7 @@ Page({
     navbarTitle: [
       "已完成",
       "待完成",
-      "已取消",
-      "已过期"
+      "已取消"
     ],
     completedOrderList: [
       /*["orderid", "value", "createTime", "expireDateTime", "order_owner", "free_lancer", "money", "pos", "kuaidi", "recieved_pos", "hidden_info"]*/
@@ -24,21 +23,18 @@ Page({
         money:'5.00'
 
       }
-    ],
-    incompletedOrderList:[],
-    canceledOrderList:[],
-    canceledOrderList:[],
-    expiredOrderList:[],
 
+
+    ],
     completedOrder: true,
     incompletedOrder: true,
-    canceledOrder: true,
-    expiredOrder:true
+    canceledOrder: true
+
   },
   onLoad: function() {
     var that = this;
     that.computeScrollViewHeight();
-    that.loadOrder();
+    //that.loadOrder();
   },
   onShow: function() {},
 
@@ -81,16 +77,16 @@ Page({
       })
     }).exec()
   },
-  loadOrder(orderList,index){
+  loadOrder(){
     wx.request({
       url: app.globalData.url+'/account/myOrder',
       data:{
+        sessionid:wx.getStorageSync('sessionid'),
         status:1
       },
       method: "GET",
       header: {
         'content-type': 'application/json', // 默认值
-        'Cookie': wx.getStorageSync('sessionid')
       },
       success(res){
         console.log(res);
