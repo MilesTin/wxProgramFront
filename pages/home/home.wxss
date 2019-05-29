@@ -1,7 +1,7 @@
 /* pages/home/home.wxss */
 .page{
-  width:100%;
-  height:1334rpx;
+  width:750rpx;
+  height:1000rpx;
   /* background-color:red;   */
   /* background-image:url("img/home/background.jpg") no-repeat; */
   /* background-image:url("https://i0.hdslb.com/bfs/album/2e07a6b2a3bbf53e2b72ee331985968daead9865.jpg@104w_104h_1e_1c.jpg"); */
@@ -57,4 +57,5 @@
   padding-left:40rpx;
   display: flex;
   flex-direction: row;
+  /* justify-content: space-between; */
 }
