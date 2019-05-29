@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"学号绑定"
+  "navigationBarTitleText":"学号绑定",
+  "enablePullDownRefresh":true
 }
