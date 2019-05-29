@@ -1,0 +1,21 @@
+<!--pages/home/home.wxml-->
+
+<view class="page">
+  <image  src="/img/home/background.jpg" style="width:100%;position:fixed;z-index:1;" mode='widthFix'/>
+  <view style="position:fixed;z-index:1;"><text style='margin-left:20px;color:white;font-style:bold;font-size:30rpx;'>最新公告:</text>
+    <text >{{marquee.text}}</text>
+  </view>
+  
+  <swiper indicator-dots='true' autoplay="false" class="swiperContainer">
+    <swiper-item>
+      <image src="/img/home/sendOrder.png" class='swiperImage' bindtap="toSendOrder"></image>
+      
+    </swiper-item>
+    <swiper-item  class='swiperImage'>
+      <image src="/img/home/receiveOrder.png" class='swiperImage' bindtap="toReceiveOrder"></image>
+    </swiper-item>
+    <swiper-item >
+      <image class='swiperImage' src="/img/home/receiveOrder.png" bindtap="toReceiveOrder"></image>
+    </swiper-item>
+  </swiper>
+</view>

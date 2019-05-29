@@ -1,0 +1,52 @@
+/* pages/home/home.wxss */
+.page{
+  width:100%;
+  height:1334rpx;
+  /* background-color:red;   */
+  /* background-image:url("img/home/background.jpg") no-repeat; */
+  /* background-image:url("https://i0.hdslb.com/bfs/album/2e07a6b2a3bbf53e2b72ee331985968daead9865.jpg@104w_104h_1e_1c.jpg"); */
+  /* background-repeat: no-repeat;
+  background-size:100%,100%; */
+}
+@keyframes around {
+    from {
+      margin-left: 100%;
+    }
+    to {
+      margin-left: var(--marqueeWidth--);/*var接受传入的变量*/
+    }
+  }
+
+.marquee_container{
+  background-color: #0099FF;
+  height: 1.2em;
+  position: relative;
+  width: 100%;
+}
+.marquee_container:hover{
+  animation-play-state: paused;  /*不起作用*/
+}
+.marquee_text{
+  display: inline-block;
+  white-space: nowrap;
+  animation-name: around;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function:linear;
+}
+.swiperContainer{
+  padding:10rpx;
+  background-color: white;
+  width:450rpx;
+  height: 540rpx;
+
+  position:fixed;
+  z-index:1;
+  left:150rpx;
+  bottom:180rpx;
+}
+
+.swiperImage{
+  width:100%;
+
+}

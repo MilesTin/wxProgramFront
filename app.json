@@ -1,11 +1,14 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/mine/mine",
+   
     "pages/testApi/testApi",
     "pages/order/send/send",
     "pages/welcome/welcome",
     "pages/logs/logs",
     "pages/index/index",
-    "pages/mine/mine",
+    
     "pages/news/news",
     "pages/order/order",
 
@@ -24,7 +27,7 @@
     "selectedColor": "#1296db",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/home/home",
         "iconPath": "/img/tabBar/index.png",
         "selectedIconPath": "/img/tabBar/index1.png",
         "text": "首页"
