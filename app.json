@@ -1,7 +1,16 @@
 {
   "pages": [
-    "pages/home/home",
+    "pages/mine/jiaowu/jiaowu",
     "pages/mine/mine",
+    
+    
+    
+    "pages/home/home",
+    
+    
+    "pages/mine/setting/setting",
+    
+    
    
     "pages/testApi/testApi",
     "pages/order/send/send",

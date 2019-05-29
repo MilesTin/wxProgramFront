@@ -35,12 +35,12 @@
       <block>
         <view class='mine-navigator'>
           <view class='mine-icon1'></view>
-          <view class='mine-text'>我的信用评分</view>
+          <view class='mine-text'>教务处绑定</view>
           <view class='mine-arrow'></view>
         </view>
         <view class='mine-navigator'>
           <view class='mine-icon2'></view>
-          <view class='mine-text'>教务处绑定</view>
+          <view class='mine-text'>我要反馈</view>
           <view class='mine-arrow'></view>
         </view>
         <view class='mine-navigator'>

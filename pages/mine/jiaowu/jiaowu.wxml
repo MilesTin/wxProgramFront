@@ -1,0 +1,41 @@
+<!--pages/mine/jiaowu/jiaowu.wxml-->
+<view class="page">
+  <image src="/img/mine/mine-bg.png" class="mine-bg" />
+  <image src="/img/jiaowu/scu.jpg" style="width:100%" mode='widthFix'/>
+  <view class='mine-frame' style="margin-left:25rpx;margin-bottom:80rpx;">
+    <view class='mine-list' >
+      <block>
+        <view class='mine-navigator'>
+          <view class='mine-icon1'></view>
+          <view class='mine-text'>学号</view>
+          <input placeholder='here' class="mine-input" bindinput="stuIdInput"/>
+       
+        </view>
+        <view class='mine-navigator'>
+          <view class='mine-icon2'></view>
+          <view class='mine-text'>密码</view>
+          <input placeholder='here' class="mine-input" bindinput='passwdInput'/>
+        </view>
+        <view class='mine-navigator'>
+          <view class='mine-icon3'></view>
+          <view class='mine-text'>验证码</view>
+          <image class="verifCode" src="{{verifCodeUrl}}"mode='heightFix'></image>
+          <input placeholder='here' class="mine-input" bindinput="captchaInput"/>
+        </view>
+        <button bindtap='submit'>提交</button>
+      </block>
+    </view>
+  </view>
+  <!-- <view class="container">
+      <view>
+        <h3>绑定教务处</h3>
+      </view>
+      <view>
+        <input class="inputBox" /> 
+      </view>
+      <view>
+        <input class="inputBox" /> 
+      </view>
+      <button class="mainButton">提交</button>
+  </view> -->
+</view>

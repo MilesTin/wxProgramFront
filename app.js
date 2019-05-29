@@ -52,8 +52,8 @@ App({
         if (res.code) {
           // 发起网络请求
           wx.request({
-            // url: this.globalData.url + '/account/login',
-            url : this.globalData.localUrl + '/account/login',
+            url: this.globalData.url + '/account/login',
+            // url : this.globalData.localUrl + '/account/login',
             data: data,
             method: "GET",
             header: {

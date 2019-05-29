@@ -13,6 +13,7 @@ Page({
     },
     storedText:'',
     iconUrl:"/img/tabBar/news.png",
+    search:"",
   },
 
   /**
@@ -39,7 +40,7 @@ Page({
     var storedText = that.data.storedText;
     console.log(storedText);
     setInterval(function(){
-      console.log(that.data.marquee.text.length);
+      // console.log(that.data.marquee.text.length);
       if (that.data.marquee.text.length==1){
         that.setData({"marquee":{"text":storedText}});
       }
@@ -114,7 +115,11 @@ Page({
 
   search:function(){
     this.setData({"iconUrl":"/img/tabBar/news1.png"});
-    
-  }
-
+    let search = this.data.search;
+    //重定向，加search
+  },
+  searchInput:function(e){
+      this.setData({"search":e.detail.value});
+      // console.log(e.detail.value);
+  },
 })
