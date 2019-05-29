@@ -38,7 +38,7 @@
   padding:10rpx;
   background-color: white;
   width:450rpx;
-  height: 540rpx;
+  height: 550rpx;
 
   position:fixed;
   z-index:1;
@@ -49,4 +49,12 @@
 .swiperImage{
   width:100%;
 
+}
+.search{
+  height:80rpx;
+  /* border:solid; */
+  padding:10rpx;
+  padding-left:40rpx;
+  display: flex;
+  flex-direction: row;
 }

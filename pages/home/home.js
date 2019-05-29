@@ -6,6 +6,9 @@ Page({
    */
   data: {
     width: 0,
+    marquee:{
+      'text':'大王叫我来巡山了，一二三四五',
+    }
   },
 
   /**
@@ -13,8 +16,23 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      width: 200
-    })
+      width: 200,
+    });
+    var storedText = this.data.marquee.text;
+    var that = this;
+    setInterval(function(){
+ 
+      if (that.data.marquee.text.length==1){
+        that.setData({"marquee":{"text":storedText}});
+      }
+      else{
+        let prev_text = that.data.marquee.text;
+        let length = prev_text.length;
+        let new_length = length-1;
+        let new_string = prev_text.substr(1,new_length);
+        that.setData("marquee",{"text":new_string});
+      }
+    },1);
   },
 
   /**

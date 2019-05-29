@@ -1,21 +1,26 @@
 <!--pages/home/home.wxml-->
 
 <view class="page">
-  <image  src="/img/home/background.jpg" style="width:100%;position:fixed;z-index:1;" mode='widthFix'/>
-  <view style="position:fixed;z-index:1;"><text style='margin-left:20px;color:white;font-style:bold;font-size:30rpx;'>最新公告:</text>
-    <text >{{marquee.text}}</text>
+  <view style="width:100%" class="search">
+    <form>
+      <input placeholder='输入关键字快速搜索:地点，快递种类' style="font-size:30rpx; width:550rpx;"></input>  
+    </form>
+  </view>
+  <image  src="/img/home/background.jpg" style="top:80rpx;width:100%;position:fixed;z-index:1;" mode='widthFix'/>
+  <view style="position:fixed;z-index:1;top:80rpx;"><text style='margin-left:20px;color:white;font-style:bold;font-size:30rpx;'>最新公告:</text>
+    <text style="color:white;font-size:25rpx;">{{marquee.text}}</text>
   </view>
   
   <swiper indicator-dots='true' autoplay="false" class="swiperContainer">
     <swiper-item>
-      <image src="/img/home/sendOrder.png" class='swiperImage' bindtap="toSendOrder"></image>
+      <image src="/img/home/sendOrder.png" class='swiperImage' bindtap="toSendOrder" mode='widthFix'></image>
       
     </swiper-item>
     <swiper-item  class='swiperImage'>
-      <image src="/img/home/receiveOrder.png" class='swiperImage' bindtap="toReceiveOrder"></image>
+      <image src="/img/home/receiveOrder.png" class='swiperImage' bindtap="toReceiveOrder" mode='widthFix'></image>
     </swiper-item>
     <swiper-item >
-      <image class='swiperImage' src="/img/home/receiveOrder.png" bindtap="toReceiveOrder"></image>
+      <image class='swiperImage' src="/img/home/receiveOrder.png" bindtap="toReceiveOrder" mode='widthFix'></image>
     </swiper-item>
   </swiper>
 </view>
