@@ -28,7 +28,7 @@
           <image class='star' src='/img/mine/star.png'></image>
         </view>
       </view>
-      <text class='mine-creditPiont'>4.97</text>
+      <text class='mine-creditPiont'>{{user.rate}}</text>
     </view>
   <view class='mine-frame'>
     <view class='mine-list'>

@@ -61,7 +61,7 @@ page{
 }
 .mine-creditPiont{
   position: absolute;
-  right: 0;
+  right:50rpx;
 }
 .mine-star1{
   width: 40rpx;

@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/home/home",
     "pages/mine/jiaowu/jiaowu",
-    "pages/mine/mine",
+    
     "pages/mine/developer/developer",
     "pages/mine/feedback/feedback",
     "pages/mine/setting/setting",
