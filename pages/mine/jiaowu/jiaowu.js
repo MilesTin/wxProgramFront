@@ -21,7 +21,7 @@ function getImg2(that) {
       if (res.statusCode == 200) {
 
         that.setData({ "verifCodeUrl": res.tempFilePath });
-        console.log(that.data.verifCodeUrl);
+        // console.log(that.data.verifCodeUrl);
       }
       else {
         getImg2(that);
@@ -110,7 +110,7 @@ Page({
    */
   onPullDownRefresh: function () {
       // getImg(this);
-      // setTimeout(function(){wx.stopPullDownRefresh();},1000);
+      setTimeout(function(){wx.stopPullDownRefresh();},1000);
       // setInterval(function(){refresh(this)},100);
     
   },
