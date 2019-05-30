@@ -1,2 +1,50 @@
 <!--pages/news/orderInfo/orderInfo.wxml-->
+<view class='orderInfo-container'>
+  <image class='orderInfo-bg' src='/img/news/orderInfo-bg.jpg'></image>
+  <view class='orderInfo-frame'>
+    <view class='orderInfo-adress'>{{order.received_pos}}{{order.kuaidi}}</view>
+    <image class='orderInfo-img' src='{{order.order_owner.head_img}}'></image>
+    <view class='orderInfo-wxName'>{{order.order_owner.wx_name}}</view>
+    <image class='star' src='/img/mine/blueStar.png'></image>
 
+    <view class='orderInfo-mainInfo'>
+      <view class='orderInfo-mainPart'>
+        <view class='orderInfo-mainPart1'>配送地址</view>
+        <view class='orderInfo-mainPart2'>{{order.received_pos}}</view>
+      </view>
+      <view class='orderInfo-mainPart'>
+        <view class='orderInfo-mainPart1'>取件地址</view>
+        <view class='orderInfo-mainPart2'>{{order.pos}}</view>
+      </view>
+      <view class='orderInfo-mainPart'>
+        <view class='orderInfo-mainPart1'>酬劳</view>
+        <view class='orderInfo-mainPart2'>¥{{order.money}}</view>
+      </view>
+      <view class='orderInfo-mainPart'>
+        <view class='orderInfo-mainPart1'>支付方式</view>
+        <view class='orderInfo-mainPart2'>线下支付</view>
+      </view>
+    </view>
+
+    <view class='orderInfo-secondInfo'>
+      <view class='orderInfo-secondPart'>
+        <view class='orderInfo-secondPart1'>创建时间</view>
+        <view class='orderInfo-secondPart2'>{{order.createTime}}</view>
+      </view>
+      <view class='orderInfo-secondPart'>
+        <view class='orderInfo-secondPart1'>截至时间</view>
+        <view class='orderInfo-secondPart2'>{{order.expireDateTime}}</view>
+      </view>
+      <view class='orderInfo-secondPart'>
+        <view class='orderInfo-secondPart1'>订单编号</view>
+        <view class='orderInfo-secondPart2'>{{order.orderid}}</view>
+      </view>
+    </view>
+
+
+  </view>
+
+
+
+  <button class='btn' bindtap='receiveOrder'>确认接单</button>
+</view>

@@ -117,7 +117,7 @@ page {
   left: 28rpx;
   width: 643rpx;
   height: 1rpx;
-  background-color: #000;
+  background-color: #828f8e;
 }
 .detail-infomation{
   position: relative;
@@ -151,9 +151,10 @@ page {
 }
 .detail-ownerPart{
   width: 500rpx;
-  height: 50rpx;
+  height: 80rpx;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .detail-part1{
   text-align: left;
@@ -161,11 +162,35 @@ page {
   height: 50rpx;
 }
 .detail-part2{
-  height: 50rpx;
+  height:50rpx;
+  width: 200rpx;
+  text-align: left;
+}
+.detail-partInfo2{
+  height: 80rpx;
+  width: 200rpx;
   text-align: left;
 }
 .detail-part3{
   height: 50rpx;
   text-align: left;
   color: #000;
+}
+.star1{
+  position: absolute;
+  left: 165rpx;
+  top:110rpx;
+  width: 228rpx;
+  height: 50rpx;
+}
+.star2{
+  position: absolute;
+  right: 165rpx;
+  top:110rpx;
+  width: 228rpx;
+  height: 50rpx;
+}
+.detail-watch{
+  width: 50rpx;
+  height: 50rpx;
 }

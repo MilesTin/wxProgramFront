@@ -1,47 +1,86 @@
 var util = require('../../utils/util.js');
 const app = getApp();
+
+//page每次加载10个数据项。+1操作push数据项
 var normalPage = 1; //综合排序
 var timePage = 1; //时间最新
 var pricePage = 1; //价格优先
-var resultLength = 10; //每次加载10个数据项
-var loadLength; //每次加载list的长度
-var bottomFlag = 0; //用于实现底部showToast只触发一次
+
+//Flag用于判断页面是否已经完全加载数据项,同时用于实现showToast只触发一次
+var normalFlag = 0;
+var timeFlag = 0;
+var priceFlag = 0;
+
+//length记录每次加载数据项的长度,初始设为10只是为了操作方便
+var normalLength = 10;
+var timeLength = 10;
+var priceLength = 10;
+
+//每次加载10个数据项
+const LENGTH = 10;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    inputValue: '',
+    inputValue: '', //search输入文本
     maxlength: 20,
-    navbarActiveIndex: 0,
+    navbarActiveIndex: 0, //初始页面为综合排序页面
     navbarTitle: [
       "综合排序",
       "最新",
-      "完成时间",
       "价格优先"
     ],
-    orderList: [],
+    normalList: [],
+    timeList: [],
+    priceList: [],
     navbarActiveIndex: 0 //当前处在的页面
   },
   onLoad: function() {
     var that = this;
     that.computeScrollViewHeight();
-    that.loadOrder();
+    var orderList = that.data.normalList;
+    that.loadOrder(orderList, 0, '', 1, '', '');
   },
   onShow: function() {},
 
+  //下拉刷新
+  onPullDownRefresh: function() {
+    var that = this;
+    wx.showNavigationBarLoading();
+    var index = that.data.navbarActiveIndex;
+    that.resetFlag_page_length(index);
+    that.resetOrderList(index);
+    var orderList = that.getOrderList(index);
+    var page = that.getPage(index);
+    that.loadOrder(orderList, index, '', page, '', '');
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
+  },
   /**
    * 点击导航栏
    */
   onNavBarTap: function(event) {
+    var that = this;
     // 获取点击的navbar的index
     let navbarTapIndex = event.currentTarget.dataset.navbarIndex
     // 设置data属性中的navbarActiveIndex为当前点击的navbar
     this.setData({
       navbarActiveIndex: navbarTapIndex
     })
-    console.log(event.currentTarget.dataset.navbarIndex)
+    //console.log(event.currentTarget.dataset.navbarIndex)
+
+    //判断是否第一次打开时间或者价格页面
+    if (timePage == 1 && navbarTapIndex == 1) {
+      var orderList = that.data.timeList;
+      that.loadOrder(orderList, 1, '', 1, '', '');
+    }
+    if (pricePage == 1 && navbarTapIndex == 2) {
+      var orderList = that.data.priceList;
+      that.loadOrder(orderList, 2, '', 1, '', '');
+    }
   },
 
   /**
@@ -72,13 +111,22 @@ Page({
       that.setData({
         scrollHeight: scrollHeight
       })
+      console.log(scrollHeight);
     })
   },
-  textInput: function(e) {},
+
+  textInput: function(e) {
+    var that = this;
+    console.log(e.detail.value);
+    that.setData({
+      inputValue: e.detail.value
+    })
+    console.log(that.data.inputValue.length);
+  },
 
 
-
-  loadOrder( /*search, page, orderByTime, orderByPrice*/ ) {
+  //参数说明orderList:传入需要push的list,index:操作的页面
+  loadOrder(orderList, index, search, page, orderByTime, orderByPrice) {
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -87,10 +135,10 @@ Page({
     wx.request({
       url: app.globalData.url + '/order/search',
       data: {
-        //search: '',//可有可无
-        page: normalPage,
-        //orderByTime:'', //1 or - 1 可有可无，1表示最新，- 1表示最久远, 创建日期
-        //orderByPrice:'', //同上，1为价格最高排序
+        search: search, //可有可无
+        page: page,
+        orderByTime: orderByTime, //1 or - 1 可有可无，1表示最新，- 1表示最久远, 创建日期
+        orderByPrice: orderByPrice, //同上，1为价格最高排序
       },
       method: "GET",
       header: {
@@ -98,27 +146,37 @@ Page({
       },
       success(res) {
         console.log(res);
-        console.log(res.data.results.length);
-        //将第一次加载的results长度赋值给loadLength;用于loadMoreOrder的判断;
         /*if (res.data.results.length>0){
           that.setData({
             have_order: true
           })
         }*/
-        loadLength = res.data.results.length;
-        var orderList = that.data.orderList;
         for (var i = 0; i < res.data.results.length; i++) {
           orderList.push(res.data.results[i])
           //字符串格式处理
           orderList[i].createTime = util.formatTime(new Date(orderList[i].createTime));
           orderList[i].expireDateTime = util.formatTime(new Date(orderList[i].expireDateTime));
           orderList[i].money = (parseFloat(orderList[i].money)).toFixed(2);
-          //console.log(orderList[i].money);
         }
-        that.setData({
-          orderList
-        })
-        console.log(orderList);
+        if (index == 0) {
+          that.setData({
+            normalList: orderList
+          })
+          normalPage = normalPage + 1;
+          normalLength = res.data.results.length;
+        } else if (index == 1) {
+          that.setData({
+            timeList: orderList
+          })
+          timePage = timePage + 1;
+          timeLength = res.data.results.length;
+        } else if (index == 2) {
+          that.setData({
+            priceList: orderList
+          })
+          pricePage = pricePage + 1;
+          priceLength = res.data.results.length;
+        }
       },
       complete() {
         wx.hideLoading();
@@ -127,41 +185,158 @@ Page({
   },
   loadMoreOrder() {
     var that = this;
-    if (loadLength < resultLength) { //上一次加载的数据项小于resultLength=10；表明数据已经加载完全
-      if (bottomFlag == 0) {
-        wx.showToast({ //如果全部加载完成了也弹一个框
+    var index = that.data.navbarActiveIndex;
+    if (index == 0) {
+      var flag = normalFlag;
+      var length = normalLength;
+    } else if (index == 1) {
+      var flag = timeFlag;
+      var length = timeLength;
+    } else if (index == 2) {
+      var flag = priceFlag;
+      var length = priceLength;
+    }
+    if (flag == 1) {
+      //do nothing,即表明数据已经加载完全，并且showToast已经触发
+    } else if (flag == 0) {
+      if (length < LENGTH) { //数据加载完全，但showToast未触发
+        wx.showToast({
           title: '无更多数据',
           duration: 1000
         });
-        bottomFlag = 1;
-      } else {}
-    } else { //仍然有数据项可以加载
-      that.loadOrder();
+        that.setFlag(index);
+      } else { //仍有数据加载（也可能是数据项数刚好为10的整数倍）
+        var orderList = that.getOrderList(index);
+        //var page=that.setPage(index);
+        if (index == 1) {
+          that.loadOrder(orderList, 1, '', timePage, 1, '');
+        } else if (index == 2) {
+          that.loadOrder(orderList, 2, '', pricePage, '', 1);
+        } else if (index == 0) {
+          that.loadOrder(orderList, 0, '', normalPage, '', '');
+        }
+      }
     }
   },
-  /*getOrderInfo(e){//获得某个订单的更多信息，需要登录
-    console.log(e.currentTarget.dataset.index);
-      var that=this;
+  setFlag(index) {
+    if (index == 0) {
+      normalFlag = 1;
+    } else if (index == 1) {
+      timeFlag = 1;
+    } else if (index == 2) {
+      priceFlag = 1;
+    }
+  },
+  resetFlag_page_length(index) {
+    if (index == 0) {
+      normalPage = 1;
+      normalLength = 10;
+      normalFlag = 0;
+    } else if (index == 1) {
+      timePage = 1;
+      timeLength = 10;
+      timeFlag = 0;
+    } else if (index == 2) {
+      pricePage = 1;
+      priceLength = 10;
+      priceFlag = 0;
+    }
+  },
+  getOrderList(index) {
+    var that = this;
+    if (index == 0) {
+      return that.data.normalList;
+    } else if (index == 1) {
+      return that.data.timeList;
+    } else if (index == 2) {
+      return that.data.priceList;
+    }
+  },
+  resetOrderList(index) {
+    var that = this;
+    if (index == 0) {
+      that.setData({
+        normalList: []
+      })
+    } else if (index == 1) {
+      that.setData({
+        timeList: []
+      })
+    } else if (index == 2) {
+      that.setData({
+        priceList: []
+      })
+    }
+  },
+  getPage(index) {
+    var that = this;
+    if (index == 0) {
+      return normalPage;
+    } else if (index == 1) {
+      return timePage;
+    } else if (index == 2) {
+      return pricePage;
+    }
+  },
+  getOrderInfo(e) { //获得某个订单的更多信息，需要登录
+    var that = this;
+    //console.log(e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
-      wx.request({
-        url: app.globalData.url +'/order/getOrder',
-        data: {
-          sessionid: wx.getStorageSync('sessionid'),
-          orderid: that.data.orderList[index].orderid
-        },
-        method: 'GET',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        success(res){
-          console.log(res);
-        }
-      })
-      wx.navigateTo({
-        url: '/pages/news/orderInfo/orderInfo?orderList='+that.data.orderList[e.currentTarget.dataset.index],
-      })
+    var orderList = that.getOrderList(that.data.navbarActiveIndex);
+    var orderInfo=orderList[index];
+    var received_pos=orderInfo.received_pos;
+    wx.request({
+      url: app.globalData.url + '/order/getOrder',
+      data: {
+        sessionid: wx.getStorageSync('sessionid'),
+        orderid: orderList[index].orderid
+      },
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success(res) {
+        console.log(res);
+        var order=JSON.stringify(res.data.order);
+        wx.navigateTo({
+          url: '/pages/news/orderInfo/orderInfo?order=' +order+'&received_pos='+received_pos,
+        })
+      }
+    })
+  },
+  /*getOrderInfo(e) { //获得某个订单的更多信息，需要登录
+    var that = this;
+    //console.log(e.currentTarget.dataset.index);
+    var index = e.currentTarget.dataset.index;
+    var orderList = that.getOrderList(that.data.navbarActiveIndex);
+    var order=orderList[index];
+    order=JSON.stringify(order);
+    wx.navigateTo({
+      url: '/pages/news/orderInfo/orderInfo?order=' + order,
+    })
   },*/
-  receiveOrder(e) {
+  submitSearch() { //未对page进行复位操作,PullDownRefresh时进行复位
+    var that = this;
+    var index = that.data.navbarActiveIndex;
+    var orderList = that.getOrderList(index);
+    //var page=that.setPage(index);
+    var search = that.data.inputValue;
+    if (search.length == 0) {
+      //do nothing,搜索框文本内容为空
+    } else {
+      if (index == 0) {
+        that.loadOrder(orderList, 1, search, normalPage, '', '');
+      } else if (index == 1) {
+        that.loadOrder(orderList, 2, search, timePage, 1, '');
+      } else if (index == 2) {
+        that.loadOrder(orderList, 3, search, pricePage, '', 1);
+      }
+    }
+    that.setData({
+      inputValue:''
+    })
+  }
+  /*receiveOrder(e) {
     var that = this;
     var index = e.currentTarget.dataset.index;
     console.log(that.data.orderList[index].orderid);
@@ -202,6 +377,5 @@ Page({
         }
       }
     })
-  }
-
+  }*/
 })

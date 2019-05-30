@@ -1,66 +1,83 @@
-// pages/news/orderInfo/orderInfo.js
+var util = require('../../../utils/util.js');
+const app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    order: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    var that = this;
+    console.log(options);
+    var order = JSON.parse(options.order);
+    order.received_pos = options.received_pos;
+    that.handleOrder(order);
+    //console.log(order);
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  handleOrder(e) {
+    var that=this;
+    var order=e;
+    order.createTime = util.formatTime(new Date(order.createTime));
+    order.expireDateTime = util.formatTime(new Date(order.expireDateTime));
+    order.money = (parseFloat(order.money)).toFixed(2);
+    //var orderOwnerTmp = order.order_owner;
+    order.order_owner = order.order_owner.replace(/\'/g, "\"");
+    order.order_owner = JSON.parse(order.order_owner);
+    order.order_owner.head_img = app.globalData.imgUrl + order.order_owner.head_img;
+    //console.log(orderOwnerTmp);
+    //var orderOwner = 'order.order_owner';
+    that.setData({
+      order: order
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  receiveOrder(){
+    var that=this;
+    wx.showModal({
+      title: '提示',
+      content: '是否确认接单',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.url +'/order/receiveOrder',
+            data:{
+              orderid:that.data.order.orderid
+            },
+            method:'GET',
+            header:{
+              'Content-Type': 'application/json',
+              'Cookie': wx.getStorageSync('sessionid')
+            },
+            success(res){
+              //下单成功
+              if(res.statusCode==200){
+                wx.showToast({
+                  title: '接单成功',
+                  icon: 'success',
+                  duration: 1500,
+                  mask:true
+                })
+                setTimeout(function () {
+                  wx.switchTab({
+                    url: '/pages/order/order',
+                  })
+                }, 1500) 
+              }else{
+                wx.showToast({
+                  title: '接单失败',
+                  icon: 'none',
+                  duration: 1500,
+                  mask: true
+                })
+                setTimeout(function () {
+                  wx.switchTab({
+                    url: '/pages/news/news',
+                  })
+                }, 1500) 
+              }
+            }
+          })
+        } else if (res.cancel) {
+          //do nothing
+        }
+      }
+    })
   }
 })

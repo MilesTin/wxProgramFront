@@ -3,7 +3,9 @@ App({
   globalData: {
     userInfo: null,
     url: 'http://129.28.140.83:81/matesHelps',
-    localUrl: 'http://127.0.0.1:8000'
+    localUrl: 'http://127.0.0.1:8000',
+    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header2: { 'Contetn-Type': 'application/json' },
   },
   onLaunch: function() {
     var that = this;

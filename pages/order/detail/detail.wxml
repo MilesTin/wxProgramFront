@@ -1,64 +1,66 @@
 <!--pages/order/detail/detail.wxml-->
 <view class='detail-container'>
+<block wx>
   <view class='detail-receive'>
-    <image class='detail-img detail-receiveImg' src='/img/order/feedback.png'></image>
-    <view class='detail-name detail-receiveName'>超级大只小肥猪</view>
-    <view class='detail-tel detail-receiveTel'>Tel:1234567890</view>
+    <image class='detail-img detail-receiveImg' src='{{list.free_lancer.head_img}}'></image>
+    <view class='detail-name detail-receiveName'>{{list.free_lancer.wx_name}}</view>
+    <image class='star1' src='/img/mine/blueStar.png'></image>
+    <view class='detail-tel detail-receiveTel'>Tel:{{list.free_lancer.phone}}</view>
     <view class='detail-circle detail-receiveCircle'>接</view>
     <view class='detail-line'></view>
   </view>
-
-
-
-
-
-
   <view class='detail-send'>
-    <image class='detail-img detail-sendImg' src='/img/order/feedback.png'></image>
-    <view class='detail-name detail-sendName'>超级大只小肥猪</view>
-    <view class='detail-tel detail-sendTel'>Tel:1234567890</view>
+    <image class='detail-img detail-sendImg' src='{{list.order_owner.head_img}}'></image>
+    <view class='detail-name detail-sendName'>{{list.order_owner.wx_name}}</view>
+    <image class='star2' src='/img/mine/blueStar.png'></image>
+    <view class='detail-tel detail-sendTel'>Tel:{{list.order_owner.phone}}</view>
     <view class='detail-circle detail-sendCircle'>发</view>
   </view>
   <view class='detail-infomation'>
     <view class='detail-owner'>
       <view class='detail-ownerPart'>
+        <view class='detail-part1'>取件地址</view>
+        <view class='detail-part2'>{{list.pos}}</view>
+      </view>
+      <view class='detail-ownerPart'>
         <view class='detail-part1'>配送地址</view>
-        <view class='detail-part2'>江安校园西园七舍</view>
+        <view class='detail-part2'>{{list.received_pos}}</view>
       </view>
       <view class='detail-ownerPart'>
         <view class='detail-part1'>酬劳</view>
-        <view class='detail-part2'>¥3.00</view>
+        <view class='detail-part2'>¥{{list.money}}</view>
       </view>
       <view class='detail-ownerPart'>
-        <view class='detail-part1'>快递价值</view>
-        <view class='detail-part2'>中等</view>
+        <view class='detail-part1'>取件信息</view>
+        <view class='detail-part2'><image class='detail-watch' src='/img/order/watch1.png' bindtap='watch'></image></view>
       </view>
-      <view class='detail-ownerPart'>
-        <view class='detail-part1'>取件号</view>
-        <view class='detail-part2'>1-1-1235</view>
-      </view>
-      <view class='detail-ownerPart'>
+      <!--<view class='detail-ownerPart'>
         <view class='detail-part1'>取件人</view>
         <view class='detail-part2'>陈键淞（1234567890）</view>
-      </view>
+      </view>-->
+        <!--<view class='detail-ownerPartInfo'>
+        <view class='detail-partInfo1'>取件信息</view>
+        <view class='detail-partInfo2'></view>
+      </view>-->
     </view>
     <view class='detail-order'>
           <view class='detail-ownerPart'>
         <view class='detail-part1'>创建时间</view>
-        <view class='detail-part3'>12345678</view>
+        <view class='detail-part3'>{{list.createTime}}</view>
       </view>
             <view class='detail-ownerPart'>
         <view class='detail-part1'>截至时间</view>
-        <view class='detail-part3'>1234568798</view>
+        <view class='detail-part3'>{{list.expireDateTime}}</view>
       </view>
             <view class='detail-ownerPart'>
         <view class='detail-part1'>订单编号</view>
-        <view class='detail-part3'>123456789</view>
+        <view class='detail-part3'>{{list.orderid}}</view>
       </view>
             <view class='detail-ownerPart'>
         <view class='detail-part1'>订单状态</view>
-        <view class='detail-part3'>快递未拿到</view>
+        <view class='detail-part3'>{{item[index]}}</view>
       </view>
     </view>
   </view>
+</block>
 </view>

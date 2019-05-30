@@ -11,67 +11,137 @@
   <view class="movie-content-wrapper">
     <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish" style='height:100%'>
       <swiper-item>
-        <block wx:if="{{!completedOrder}}">
+        <block wx:if="{{!flag[0]}}">
           <view class='box-container'>
             <image class='box-blankIcon' src='/img/order/blank.png'></image>
             <text class='box-blankText'>您目前暂无订单哦~</text>
           </view>
         </block>
-        <block wx:if="{{completedOrder}}">
+        <block wx:if="{{flag[0]}}">
           <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px">
-            <block wx:for="{{completedOrderList}}" wx:for-item="item" wx:for-index="idx">
+            <block wx:for="{{list.completedList}}" wx:for-item="item" wx:for-index="index" wx:key="{{item.orderid}}">
               <view class='box-list'>
-                <image class='order-img' src='{{item.head_img}}'></image>
-                <view class='order-name'>
-                  <text class='order-wxName'>{{item.wx_name}}</text>
+                <image class='order-img' src='{{item.free_lancer.head_img}}'></image>
+                <view class='order-name' data-index="{{index}}" bindtap='navigateToDetail'>
+                  <text class='order-wxName'>{{item.free_lancer.wx_name}}</text>
                   <view class='order-arrow'></view>
                 </view>
                 <view class='order-express'>
-                  <text>{{item.pos}}</text>
-                  <text>x{{item.count}}</text>
+                  <text>{{item.kuaidi}}</text>
+                  <text>x1</text>
                 </view>
                 <view class='order-line'></view>
-                <view class='order-money'>共{{item.count}}件快递，实付
+                <view class='order-money'>共1件快递，实付
                   <text class='order-moneyText'>¥{{item.money}}</text>
                 </view>
-                <view class='order-button'><button class="btn btn1">取消订单</button><button class="btn btn2">确认收货</button></view>
+                <view class='order-button'>
+                  <button class="btn btn1" data-orderid='{{item.orderid}}' bindtap='getComment'>查看评价</button>
+                  <button class="btn btn2" data-orderid='{{item.orderid}}' bindtap='toComment'>评价</button>
+                </view>
               </view>
             </block>
           </scroll-view>
         </block>
       </swiper-item>
       <swiper-item>
-        <block wx:if="{{!having_order}}">
+        <block wx:if="{{!flag[1]}}">
           <view class='box-container'>
             <image class='box-blankIcon' src='/img/order/blank.png'></image>
             <text class='box-blankText'>您目前暂无订单哦~</text>
           </view>
         </block>
-        <block wx:if="{{having_order}}">
+        <block wx:if="{{flag[1]}}">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
-            <block wx:for="{{recyclingBox}}" wx:for-item="item" wx:for-index="idx">
+            <block wx:for="{{list.canceledList}}" wx:for-item="item" wx:for-index="index" wx:key="{{item.orderid}}">
               <view class='box-list'>
+                <image class='order-img' src='{{item.free_lancer.head_img}}'></image>
+                <view class='order-name' data-index="{{index}}" data-status="{{item.status}}" bindtap='navigateToDetail'>
+                  <text class='order-wxName'>{{item.free_lancer.wx_name}}</text>
+                  <view class='order-arrow'></view>
+                </view>
+                <view class='order-express'>
+                  <text>{{item.kuaidi}}</text>
+                  <text>x1</text>
+                </view>
+                <view class='order-line'></view>
+                <view class='order-money'>共1件快递，实付
+                  <text class='order-moneyText'>¥{{item.money}}</text>
+                </view>
+                <view class='order-button'>
+                  <button class="btn btn1" bindtap='toReceiveOrder'>去接单</button>
+                  <button class="btn btn2" bindtap='toSendOrder'>去发单</button>
+                </view>
               </view>
             </block>
           </scroll-view>
         </block>
       </swiper-item>
       <swiper-item>
-        <block wx:if="{{!had_order}}">
+        <block wx:if="{{!flag[2]}}">
           <view class='box-container'>
             <image class='box-blankIcon' src='/img/order/blank.png'></image>
             <text class='box-blankText'>您目前暂无订单哦~</text>
           </view>
         </block>
-        <block wx:if="{{had_order}}">
-          <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
-            <block wx:for="{{recyclingBox}}" wx:for-item="item" wx:for-index="idx">
+        <block wx:if="{{flag[2]}}">
+          <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px">
+            <block wx:for="{{list.incompletedList}}" wx:for-item="item" wx:for-index="index" wx:key="{{item.orderid}}">
               <view class='box-list'>
+                <image class='order-img' src='{{item.free_lancer.head_img}}'></image>
+                <view class='order-name' data-index="{{index}}" data-status="{{item.status}}" bindtap='navigateToDetail'>
+                  <text class='order-wxName'>{{item.free_lancer.wx_name}}</text>
+                  <view class='order-arrow'></view>
+                </view>
+                <view class='order-express'>
+                  <text>{{item.kuaidi}}</text>
+                  <text>x1</text>
+                </view>
+                <view class='order-line'></view>
+                <view class='order-money'>共1件快递，实付
+                  <text class='order-moneyText'>¥{{item.money}}</text>
+                </view>
+                <view class='order-button'>
+                  <button class="btn btn1" data-orderid='{{item.orderid}}' bindtap='cancelOrder'>取消订单</button>
+                  <button class="btn btn2" data-orderid='{{item.orderid}}' bindtap='completeOrder'>确认收货</button>
+                </view>
               </view>
             </block>
           </scroll-view>
         </block>
       </swiper-item>
+      <swiper-item>
+        <block wx:if="{{!flag[3]}}">
+          <view class='box-container'>
+            <image class='box-blankIcon' src='/img/order/blank.png'></image>
+            <text class='box-blankText'>您目前暂无订单哦~</text>
+          </view>
+        </block>
+        <block wx:if="{{flag[3]}}">
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
+            <block wx:for="{{list.expiredList}}" wx:for-item="item" wx:for-index="index" wx:key="{{orderid}}">
+                          <view class='box-list'>
+                <image class='order-img' src='{{item.free_lancer.head_img}}'></image>
+                <view class='order-name' data-index="{{index}}" data-status="{{item.status}}" bindtap='navigateToDetail'>
+                  <text class='order-wxName'>{{item.free_lancer.wx_name}}</text>
+                  <view class='order-arrow'></view>
+                </view>
+                <view class='order-express'>
+                  <text>{{item.kuaidi}}</text>
+                  <text>x1</text>
+                </view>
+                <view class='order-line'></view>
+                <view class='order-money'>共1件快递，实付
+                  <text class='order-moneyText'>¥{{item.money}}</text>
+                </view>
+                <view class='order-button'>
+                  <button class="btn btn1" bindtap='toReceiveOrder'>去接单</button>
+                  <button class="btn btn2" bindtap='toSendOrder'>去发单</button>
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </block>
+      </swiper-item>   
     </swiper>
   </view>
 </view>

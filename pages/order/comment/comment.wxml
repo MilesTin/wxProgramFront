@@ -1,0 +1,13 @@
+<!--pages/order/comment/comment.wxml-->
+<view class='feedback-container'>
+  <form bindsubmit='comment'>
+    <view class='text-border'>
+      <textarea maxlength='{{maxlength}}' cursor='{{cursor}}' placeholder="请输入您的评价..." placeholder-style='color:#a0cdb4' bindinput='textInput' value='{{commentText}}' name='comment' style='font-size:40rpx;color:#66b075'>
+      </textarea>
+      <view class='feedback-remainder'>
+        <text class="text-remainder">{{current_words}}/{{maxlength}}</text>
+      </view>
+    </view>
+    <button form-type='submit' disabled='{{disabled}}'>确定</button>
+  </form>
+</view>

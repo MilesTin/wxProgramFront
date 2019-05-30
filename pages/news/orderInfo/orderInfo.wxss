@@ -1,1 +1,144 @@
 /* pages/news/orderInfo/orderInfo.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.orderInfo-container{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.orderInfo-bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.orderInfo-frame{
+  position: absolute;
+  bottom: 0;
+  width: 650rpx;
+  height: 95%;
+  background-color: white;
+  border-top-left-radius:0.5%;
+  border-top-right-radius:0.5%;
+  box-shadow:3px 3px 10px rgba(0, 0, 0, 0.2);  
+}
+button::after{ 
+	border: none; 
+  border-radius: 0;
+}
+.btn {
+position: fixed;
+bottom: 0;
+border-radius: 0;
+width: 100%;
+background-color: #7e57c2;
+color: #ffffff;
+font-size: 45rpx;
+}
+.orderInfo-img {
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 140rpx;
+  left: 40rpx;
+}
+.orderInfo-adress{
+  position: absolute;
+  left: 40rpx;
+  top: 40rpx;
+  width: 610rpx;
+  height:100rpx;
+  text-align: left;
+  color: #7e57c2;
+  font-size: 40rpx;
+}
+.orderInfo-wxName{
+  position: absolute;
+  left: 240rpx;
+  top: 170rpx;
+  width: 410rpx;
+  height:70rpx;
+  text-align: left;
+  color: #000000;
+  font-size: 35rpx;
+}
+.star{
+  position: absolute;
+  left: 235rpx;
+  top:240rpx;
+  width: 228rpx;
+  height: 50rpx;
+}
+.orderInfo-mainInfo{
+  position: relative;
+  width: 600rpx;
+  height: 400rpx;
+  left: 40rpx;
+  top:320rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 35rpx;
+  color: #00a0e9;
+  text-align: left;
+}
+.orderInfo-mainPart{
+  position: relative;
+  width: 600rpx;
+  height: 100rpx;
+  display: flex;
+}
+.orderInfo-mainPart1{
+  position: absolute;
+  width: 150rpx;
+  height: 100rpx;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+.orderInfo-mainPart2{
+  position: absolute;
+  width: 400rpx;
+  height: 100rpx;
+  left: 190rpx;
+  display: flex;
+  align-items: center;
+}
+.orderInfo-secondInfo{
+  position: absolute;
+  width: 600rpx;
+  height: 240rpx;
+  left: 40rpx;
+  top:720rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+  color: #828f8e;
+  text-align: left;
+}
+.orderInfo-secondPart{
+  position: relative;
+  width: 600rpx;
+  height: 80rpx;
+  display: flex;
+}
+.orderInfo-secondPart1{
+  position: absolute;
+  width: 150rpx;
+  height: 80rpx;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+.orderInfo-secondPart2{
+  position: absolute;
+  width: 400rpx;
+  height: 80rpx;
+  left: 190rpx;
+  display: flex;
+  align-items: center;
+}

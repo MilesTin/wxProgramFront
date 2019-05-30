@@ -1,20 +1,23 @@
 {
   "pages": [
-    "pages/mine/mine",
+    "pages/order/order",
+    "pages/order/send/send",
     "pages/home/home",
+    "pages/mine/mine",
+    
     "pages/mine/jiaowu/jiaowu",
     
     "pages/mine/developer/developer",
     "pages/mine/feedback/feedback",
     "pages/mine/setting/setting",
     "pages/testApi/testApi",
-    "pages/order/send/send",
+    
     "pages/welcome/welcome",
     "pages/logs/logs",
     "pages/index/index",
     
     "pages/news/news",
-    "pages/order/order",
+    
 
     "pages/order/detail/detail"
 

@@ -20,8 +20,8 @@ Page({
     let header = {"Content-Type":"application/json"};
     header['Cookie'] = wx.getStorageSync("sessionid");
     wx.request({
-      url:app.globalData.localUrl + "/account/myInfo",
-      // url: app.globalData.url + "/account/myInfo',
+      // url:app.globalData.localUrl + "/account/myInfo",
+      url: app.globalData.url + "/account/myInfo",
       header:header,
       success:function(res){
         console.log(typeof(res.data));
