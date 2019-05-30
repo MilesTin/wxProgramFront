@@ -11,6 +11,25 @@ function sleep(n) {
   }
   // console.log('休眠后：' + new Date().getTime());
 };
+function getImg2(that) {
+  that.setData({ "verifCodeUrl": "" });
+  wx.downloadFile({
+    url: "http://129.28.140.83:81/static/matesHelps/account/img/login.jpg",
+
+    success: function (res) {
+      console.log(res);
+      if (res.statusCode == 200) {
+
+        that.setData({ "verifCodeUrl": res.tempFilePath });
+        console.log(that.data.verifCodeUrl);
+      }
+      else {
+        getImg2(that);
+      }
+    },
+
+  });
+};
 function getImg(thisObj) {
   var that = thisObj;
   that.setData({ "verifCodeUrl": "" });
@@ -22,37 +41,21 @@ function getImg(thisObj) {
     url: app.globalData.url + "/account/getIdCaptcha",
     header: header,
     success: function (res) {
-      console.log(res);
-  
-      that.setData({ "verifCodeUrl": "http://129.28.140.83:81/static/matesHelps/account/img/login.jpg" });
-      wx.setStorageSync("sessionid", res.header['Set-Cookie']);
+      if (res.statusCode==200){
+        console.log(res);
+        // wx.setStorageSync("sessionid", res.header['Set-Cookie']);
+        // sleep(3000);
+        getImg2(that);
+      }
+      else{
+        console.log(res);
+      }
+      
     }
   });
 };
-function refresh(that){
-  var thatObj = that;
-  thatObj.setData({ "verifCodeUrl": "" });
-  thatObj.setData({ "verifCodeUrl": "http://129.28.140.83:81/static/matesHelps/account/img/login.jpg" });
-};
-function getImg2(that){
-  that.setData({ "verifCodeUrl": "" });
-  wx.downloadFile({
-    url: "http://129.28.140.83:81/static/matesHelps/account/img/login.jpg",
 
-    success:function(res){
-      console.log(res);
-      if (res.statusCode==200){
-        
-        that.setData({ "verifCodeUrl": res.tempFilePath });
-        console.log(that.data.verifCodeUrl);
-      }
-      else{
-        getImg2(that);
-      }
-    },
-    
-  });
-};
+
 
 Page({
 
@@ -70,37 +73,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //请求加载验证码
-    function getImg(thisObj) {
-      var that = thisObj;
-      that.setData({ "verifCodeUrl": "" });
-      let header = { 'Content-Type': 'application/json' };
-      header['Cookie'] = wx.getStorageSync('sessionid');
-      var localImgUrl = ""
-      wx.request({
-        // url: app.globalData.localUrl + "/account/getIdCaptcha",
-        url: app.globalData.url + "/account/getIdCaptcha",
-        header: header,
-        success: function (res) {
-          sleep(100);
-          that.setData({ "verifCodeUrl": "http://129.28.140.83:81/static/matesHelps/account/img/login.jpg" });
-          wx.setStorageSync("sessionid", res.header['Set-Cookie']);
-        }
-      })
-    };
-    function sleep(n) {
-      var start = new Date().getTime();
-      //  console.log('休眠前：' + start);
-      while (true) {
-        if (new Date().getTime() - start > n) {
-          break;
-        }
-      }
-      // console.log('休眠后：' + new Date().getTime());
-    };
-    
-
-    getImg2(this);
+    getImg(this);
 
   },
   
@@ -136,7 +109,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-      getImg2(this);
+      // getImg(this);
       // setTimeout(function(){wx.stopPullDownRefresh();},1000);
       // setInterval(function(){refresh(this)},100);
     
@@ -161,7 +134,12 @@ Page({
     let passwd = this.data.passwd;
     var that = this;
     let header = { "Content-Type": "application/x-www-form-urlencoded" };
+    //test
+    stuId = "2017141461248";
+    passwd = "014170";
+
     let data = {"stuId":stuId,"passwd":passwd,"captcha":captcha};
+    console.log(data);
     console.log(data);
     header['Cookie'] = wx.getStorageSync("sessionid");
     wx.request({
@@ -199,16 +177,14 @@ Page({
             duration:1000,
             icon:'loading',
             success:function(){
-              getImg2(that);
+              // setTimeout(function(){getImg(that)},2000);
+              getImg(that);
               // setInterval(function(){refresh(that)}, 100);
             }
           })
         }
       },
-      fail:function(){
-        getImg(that);
       
-      }
     })
   },
   passwdInput:function(e){

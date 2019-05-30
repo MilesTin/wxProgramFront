@@ -19,7 +19,7 @@
         <view class='mine-navigator'>
           <view class='mine-icon3'></view>
           <view class='mine-text'>验证码</view>
-          <image class="verifCode" src="{{verifCodeUrl}}"mode='heightFix'></image>
+          <image class="verifCode" src="{{verifCodeUrl}}" wx:if="{{verifCodeUrl.length>0}}" mode='heightFix'></image>
           <input placeholder='here' class="mine-input" bindinput="captchaInput"/>
         </view>
         <button bindtap='submit'>提交</button>
