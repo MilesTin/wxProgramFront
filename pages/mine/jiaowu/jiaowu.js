@@ -135,8 +135,7 @@ Page({
     var that = this;
     let header = { "Content-Type": "application/x-www-form-urlencoded" };
     //test
-    stuId = "2017141461248";
-    passwd = "014170";
+
 
     let data = {"stuId":stuId,"passwd":passwd,"captcha":captcha};
     console.log(data);

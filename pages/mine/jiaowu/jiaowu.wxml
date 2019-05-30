@@ -8,19 +8,19 @@
         <view class='mine-navigator'>
           <view class='mine-icon1'></view>
           <view class='mine-text'>学号</view>
-          <input placeholder='here' class="mine-input" bindinput="stuIdInput"/>
+          <input placeholder='here' class="mine-input" bindinput="stuIdInput" type="number"/>
        
         </view>
         <view class='mine-navigator'>
           <view class='mine-icon2'></view>
           <view class='mine-text'>密码</view>
-          <input placeholder='here' class="mine-input" bindinput='passwdInput'/>
+          <input type="number" password='true' placeholder='here' class="mine-input" bindinput='passwdInput' />
         </view>
         <view class='mine-navigator'>
           <view class='mine-icon3'></view>
           <view class='mine-text'>验证码</view>
           <image class="verifCode" src="{{verifCodeUrl}}" wx:if="{{verifCodeUrl.length>0}}" mode='heightFix'></image>
-          <input placeholder='here' class="mine-input" bindinput="captchaInput"/>
+          <input placeholder='here' class="mine-input" bindinput="captchaInput" bindconfirm='submit' confirm-type='done'/>
         </view>
         <button bindtap='submit'>提交</button>
       </block>
