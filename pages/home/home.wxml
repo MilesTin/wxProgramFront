@@ -20,7 +20,7 @@
       <image src="/img/home/receiveOrder.png" class='swiperImage' bindtap="toReceiveOrder" mode='widthFix'></image>
     </swiper-item>
     <swiper-item >
-      <image class='swiperImage' src="/img/home/receiveOrder.png" bindtap="toReceiveOrder" mode='widthFix'></image>
+      <image class='swiperImage' src="/img/home/toBeContinue.png" bindtap="" mode='widthFix'></image>
     </swiper-item>
   </swiper>
 </view>

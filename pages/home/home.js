@@ -107,9 +107,10 @@ Page({
       url: '../order/send/send',
     })
   },
-  toReceiveOrdder:function(){
+  toReceiveOrder:function(){
+    console.log("hello");
     wx.navigateTo({
-      url: '../order/',//搜索后页面
+      url: '../order/order',//搜索后页面
     })
   },
 
