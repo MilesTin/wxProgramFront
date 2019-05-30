@@ -1,0 +1,13 @@
+<!--pages/mine/feedback/feedback.wxml-->
+<view class="page">
+  <view class="container">
+    <image class='mine-bg' src='/img/mine/mine-bg.png'></image>
+    <view class="title">
+      我要反馈
+    </view>
+    <view class="smallTitle">如果遇到程序异常，不能下单，或发生支付纠纷，请反馈联系管理员,我们会尽快联系你</view>
+    <textarea type='text' class="inputText" placeholder='请输入反馈内容' placeholder-class='pClass' bindinput="feedbackInput"/>
+    
+    <button class="mainButton" bindtap="submit">提交</button>
+  </view>
+</view>

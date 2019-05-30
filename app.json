@@ -1,17 +1,12 @@
 {
   "pages": [
-    "pages/mine/jiaowu/jiaowu",
     "pages/mine/mine",
-    
-    
+    "pages/mine/developer/developer",
+    "pages/mine/feedback/feedback",
+    "pages/mine/jiaowu/jiaowu",
     
     "pages/home/home",
-    
-    
     "pages/mine/setting/setting",
-    
-    
-   
     "pages/testApi/testApi",
     "pages/order/send/send",
     "pages/welcome/welcome",

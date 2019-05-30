@@ -33,22 +33,22 @@
   <view class='mine-frame'>
     <view class='mine-list'>
       <block>
-        <view class='mine-navigator'>
+        <view class='mine-navigator' bindtap="toJiaoWu">
           <view class='mine-icon1'></view>
-          <view class='mine-text'>教务处绑定</view>
+          <view class='mine-text' >教务处绑定</view>
           <view class='mine-arrow'></view>
         </view>
-        <view class='mine-navigator'>
+        <view class='mine-navigator' bindtap="toFeedBack">
           <view class='mine-icon2'></view>
-          <view class='mine-text'>我要反馈</view>
+          <view class='mine-text' >我要反馈</view>
           <view class='mine-arrow'></view>
         </view>
-        <view class='mine-navigator'>
+        <view class='mine-navigator' bindtap="toDeveloper">
           <view class='mine-icon3'></view>
           <view class='mine-text'>开发者</view>
           <view class='mine-arrow'></view>
         </view>
-        <view class='mine-navigator'>
+        <view class='mine-navigator' bindtap="toSetting">
           <view class='mine-icon4'></view>
           <view class='mine-text'>设置</view>
           <view class='mine-arrow'></view>

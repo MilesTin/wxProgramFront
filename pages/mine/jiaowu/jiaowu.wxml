@@ -2,7 +2,7 @@
 <view class="page">
   <image src="/img/mine/mine-bg.png" class="mine-bg" />
   <image src="/img/jiaowu/scu.jpg" style="width:100%" mode='widthFix'/>
-  <view class='mine-frame' style="margin-left:25rpx;margin-bottom:80rpx;">
+  <view class='mine-frame' style="margin-left:25rpx;margin-bottom:150rpx;">
     <view class='mine-list' >
       <block>
         <view class='mine-navigator'>

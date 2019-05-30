@@ -1,20 +1,18 @@
-// pages/mine/mine.js
+// pages/mine/developer/developer.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    width:0,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      width:200
-    })
+
   },
 
   /**
@@ -64,25 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  toJiaoWu:function(){
-    wx.navigateTo({
-      url: 'jiaowu/jiaowu',
-    })
-  },
-  toFeedBack:function(){
-    wx.navigateTo({
-      url: 'feedback/feedback',
-    })
-  },
-  toDeveloper:function(){
-    wx.navigateTo({
-      url: 'developer/developer',
-    })
-  },
-  toSetting:function(){
-    wx.navigateTo({
-      url: 'setting/setting',
-    })
   }
 })
