@@ -43,12 +43,12 @@
           <view class='mine-text' >我要反馈</view>
           <view class='mine-arrow'></view>
         </view>
-        <view class='mine-navigator' bindtap="toDeveloper">
+        <view class='mine-navigator'>
           <view class='mine-icon3'></view>
           <view class='mine-text'>开发者</view>
           <view class='mine-arrow'></view>
         </view>
-        <view class='mine-navigator' bindtap="toSetting">
+        <view class='mine-navigator'>
           <view class='mine-icon4'></view>
           <view class='mine-text'>设置</view>
           <view class='mine-arrow'></view>

@@ -4,6 +4,7 @@ App({
     userInfo: null,
     url: 'http://129.28.140.83:81/matesHelps',
     localUrl: 'http://127.0.0.1:8000',
+    imgUrl:'http://129.28.140.83:81',
     header: { "Content-Type": "application/x-www-form-urlencoded" },
     header2: { 'Contetn-Type': 'application/json' },
   },

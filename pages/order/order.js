@@ -86,6 +86,7 @@ Page({
     });
     wx.request({
       url: app.globalData.url + '/account/myOrder',
+      // url:app.globalData.localUrl + '/account/myOrder',
       data: {
         status: status
       },
@@ -160,25 +161,36 @@ Page({
     console.log(partList);
     for (var i = 0; i < partList.length; i++) {
       //对received中的order_owner进行处理
+      console.log(partList);
       var receivedOrderOwnerTmp = partList[i].order_owner;
-      receivedOrderOwnerTmp = receivedOrderOwnerTmp.replace(/\'/g, "\"");
-      receivedOrderOwnerTmp = JSON.parse(receivedOrderOwnerTmp);
+      if (receivedOrderOwnerTmp){
+        console.log("167");
+        console.log(receivedOrderOwnerTmp);
+        receivedOrderOwnerTmp = receivedOrderOwnerTmp.split("'").join('"');
+        receivedOrderOwnerTmp = JSON.parse(receivedOrderOwnerTmp);
       //console.log(receivedOrderOwnerTmp.head_img)
-      receivedOrderOwnerTmp.head_img = app.globalData.imgUrl + receivedOrderOwnerTmp.head_img;
+        receivedOrderOwnerTmp.head_img = app.globalData.imgUrl + receivedOrderOwnerTmp.head_img;
       //console.log(receivedOrderOwnerTmp);
+      }
       var receivedOrderOwner = str+'[' + i + '].order_owner';
       //对received中的free_lancer进行处理
       var receivedFreeLancerTmp = partList[i].free_lancer;
-      receivedFreeLancerTmp = receivedFreeLancerTmp.replace(/\'/g, "\"");
-      receivedFreeLancerTmp = JSON.parse(receivedFreeLancerTmp);
-      receivedFreeLancerTmp.head_img = app.globalData.imgUrl + receivedFreeLancerTmp.head_img;
+      if (receivedFreeLancerTmp){
+        receivedFreeLancerTmp = receivedFreeLancerTmp.split("'").join('"');
+        receivedFreeLancerTmp = JSON.parse(receivedFreeLancerTmp);
+        receivedFreeLancerTmp.head_img = app.globalData.imgUrl + receivedFreeLancerTmp.head_img;
+      }
+      
       var receivedFreeLancer = str+'[' + i + '].free_lancer';
-
-      that.setData({
-        [receivedOrderOwner]: receivedOrderOwnerTmp,
-        [receivedFreeLancer]: receivedFreeLancerTmp
-      })
+      if (receivedOrderOwnerTmp!=null){
+        that.setData({[receivedOrderOwner]:receivedOrderOwnerTmp});
+      }
+      if (receivedOrderOwnerTmp != null) {
+        that.setData({ [receivedFreeLancer]: receivedFreeLancerTmp });
+      }
     }
+    console.log("line 185");
+    console.log(this.data);
     /*for (var i = 0; i < that.data.sendList.length; i++) {
       //对send中的order_owner进行处理
       var sendOrderOwnerTmp = that.data.sendList[i].order_owner;
@@ -208,7 +220,8 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.request({
-            url: app.globalData.url + '/order/cancelOrder',
+            // url: app.globalData.url + '/order/cancelOrder',
+            url: app.globalData.localUrl + '/order/cancelOrder',
             data: {
               orderid: orderid
             },

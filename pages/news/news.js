@@ -38,11 +38,19 @@ Page({
     priceList: [],
     navbarActiveIndex: 0 //当前处在的页面
   },
-  onLoad: function() {
+  onLoad: function(options) {
+    let search = wx.getStorageSync("search");
+    wx.setStorageSync("search","");
     var that = this;
     that.computeScrollViewHeight();
     var orderList = that.data.normalList;
-    that.loadOrder(orderList, 0, '', 1, '', '');
+    if (search){
+      that.loadOrder(orderList,0,search,1,'','');
+    }
+    else{
+      that.loadOrder(orderList, 0, '', 1, '', '');
+    }
+   
   },
   onShow: function() {},
 

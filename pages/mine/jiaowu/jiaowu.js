@@ -109,7 +109,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-      // getImg(this);
+      getImg(this);
       setTimeout(function(){wx.stopPullDownRefresh();},1000);
       // setInterval(function(){refresh(this)},100);
     

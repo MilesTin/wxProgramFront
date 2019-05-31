@@ -108,16 +108,23 @@ Page({
     })
   },
   toReceiveOrder:function(){
-    console.log("hello");
-    wx.navigateTo({
-      url: '../order/order',//搜索后页面
+    // console.log("hello");
+    wx.switchTab({
+      url: '/pages/news/news',
     })
   },
-
   search:function(){
     this.setData({"iconUrl":"/img/tabBar/news1.png"});
     let search = this.data.search;
     //重定向，加search
+    if (!search){
+      search = "";
+    }
+    wx.setStorageSync('search',search);
+    wx.switchTab({
+      url: '/pages/news/news',
+    })
+    this.setData({"iconUrl":"/img/tabBar/news.png"})
   },
   searchInput:function(e){
       this.setData({"search":e.detail.value});
