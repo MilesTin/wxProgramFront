@@ -121,9 +121,16 @@ Page({
       search = "";
     }
     wx.setStorageSync('search',search);
+
     wx.switchTab({
       url: '/pages/news/news',
+      success: function (e) {
+        var page = getCurrentPages().pop();
+        if (page == undefined || page == null) return;
+        page.onLoad();
+      }
     })
+  
     this.setData({"iconUrl":"/img/tabBar/news.png"})
   },
   searchInput:function(e){

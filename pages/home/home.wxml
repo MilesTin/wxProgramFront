@@ -3,7 +3,7 @@
 <view class="page">
   <view style="width:100%" class="search">
     <!-- <image src="" /> -->
-    <input placeholder='输入关键字快速搜索:地点，快递种类' style="font-size:30rpx; width:550rpx;border-radius:15rpx;border-style:solid;padding-left:10rpx;padding-right:10rpx;border-color:gray;" bindinput='searchInput'></input>  
+    <input placeholder='输入关键字快速搜索:地点，快递种类' style="font-size:30rpx; width:550rpx;border-radius:15rpx;border-style:solid;padding-left:10rpx;padding-right:10rpx;border-color:gray;" bindinput='searchInput' confirm-type='search' bindconfirm='search'></input>  
     <image src="{{iconUrl}}" style="width:50rpx;margin-left:40rpx;" mode='widthFix' ontap="search" />
   </view>
   <image  src="/img/home/background.jpg" style="top:80rpx;width:100%;position:fixed;z-index:1;" mode='widthFix'/>

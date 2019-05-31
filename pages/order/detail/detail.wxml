@@ -1,8 +1,9 @@
 <!--pages/order/detail/detail.wxml-->
 <view class='detail-container'>
 <block wx>
-  <view class='detail-receive'>
-    <image class='detail-img detail-receiveImg' src='{{list.free_lancer.head_img}}'></image>
+  <view class='detail-receive' wx:if="{{list.free_lancer}}">
+    <image class='detail-img detail-receiveImg' src='{{list.free_lancer.head_img}}' wx:if="{{list.free_lancer}}"></image>
+    <image class='detail-img detail-receiveImg' src='{{defaultImg}}' wx:else></image>
     <view class='detail-name detail-receiveName'>{{list.free_lancer.wx_name}}</view>
     <image class='star1' src='/img/mine/blueStar.png'></image>
     <view class='detail-tel detail-receiveTel'>Tel:{{list.free_lancer.phone}}</view>

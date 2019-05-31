@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/news/news",
     "pages/order/order",
     "pages/order/send/send",
     
@@ -16,9 +17,6 @@
     "pages/welcome/welcome",
     "pages/logs/logs",
     "pages/index/index",
-    
-    "pages/news/news",
-    
 
     "pages/order/detail/detail"
 

@@ -87,10 +87,11 @@
           <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px">
             <block wx:for="{{list.incompletedList}}" wx:for-item="item" wx:for-index="index" wx:key="{{item.orderid}}">
               <view class='box-list'>
-                <image class='order-img' src='{{item.free_lancer.head_img}}'></image>
+                <image class='order-img' src='{{item.free_lancer.head_img}}' wx:if="{{item.free_lancer}}"></image>
+                <image class='order-img' src='{{defaultImg}}' wx:else></image>
                 <view class='order-name' data-index="{{index}}" data-status="{{item.status}}" bindtap='navigateToDetail'>
-                  <text class='order-wxName' wx:if="{{item.free_lancer}}"> >{{item.free_lancer.wx_name}}</text>
-                  <text class='order-wxName' wx:else> >"未接单"</text>
+                  <text class='order-wxName' wx:if="{{item.free_lancer}}">{{item.free_lancer.wx_name}}</text>
+                  <text class='order-wxName' wx:else>未接单</text>
                   <view class='order-arrow'></view>
                 </view>
                 <view class='order-express'>
@@ -121,9 +122,11 @@
           <scroll-view scroll-y="{{true}}" style="height:{{height}}px">
             <block wx:for="{{list.expiredList}}" wx:for-item="item" wx:for-index="index" wx:key="{{orderid}}">
                           <view class='box-list'>
-                <image class='order-img' src='{{item.free_lancer.head_img}}'></image>
+                <image class='order-img' src='{{item.free_lancer.head_img}}' wx:if="{{item.free_lancer}}"></image>
+                <image class='order-img' src='{{defaultImg}}' wx:else></image>
                 <view class='order-name' data-index="{{index}}" data-status="{{item.status}}" bindtap='navigateToDetail'>
-                  <text class='order-wxName'>{{item.free_lancer.wx_name}}</text>
+                  <text class='order-wxName' wx:if="{{item.free_lancer}}">{{item.free_lancer.wx_name}}</text>
+                  <text class='order-wxName' wx:else>未接单</text>
                   <view class='order-arrow'></view>
                 </view>
                 <view class='order-express'>

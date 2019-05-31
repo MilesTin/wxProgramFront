@@ -38,17 +38,34 @@ Page({
     priceList: [],
     navbarActiveIndex: 0 //当前处在的页面
   },
-  onLoad: function(options) {
-    let search = wx.getStorageSync("search");
+  onUnload: function () {
     wx.setStorageSync("search","");
+  },
+  onLoad: function(options) {
+    var search = wx.getStorageSync("search");
+    console.log("search:"+search);
+    var normalLength = 10;
+    var timeLength = 10;
+    var priceLength = 10;
+    var normalPage = 1; //综合排序
+    var timePage = 1; //时间最新
+    var pricePage = 1; //价格优先
+    var normalFlag = 0;
+    var timeFlag = 0;
+    var priceFlag = 0;
     var that = this;
     that.computeScrollViewHeight();
     var orderList = that.data.normalList;
     if (search){
-      that.loadOrder(orderList,0,search,1,'','');
+      wx.setStorageSync("search",search);
+      that.loadOrder([], 0, search, normalPage, '', '');
+      that.loadOrder([], 1, search, timePage, 1, '');
+      that.loadOrder([], 2, search, pricePage, '', 1);
     }
     else{
-      that.loadOrder(orderList, 0, '', 1, '', '');
+      that.loadOrder([], 0, search, normalPage, '', '');
+      that.loadOrder([], 1, search, timePage, 1, '');
+      that.loadOrder([], 2, search, pricePage, '', 1);
     }
    
   },
@@ -59,17 +76,31 @@ Page({
     var that = this;
     wx.showNavigationBarLoading();
     var index = that.data.navbarActiveIndex;
-    that.resetFlag_page_length(index);
-    that.resetOrderList(index);
+
+    that.resetOrderList(0);
+    that.resetOrderList(1);
+    that.resetOrderList(2);
+    that.resetFlag_page_length(0);
+    that.resetFlag_page_length(1);
+    that.resetFlag_page_length(2);
     var orderList = that.getOrderList(index);
     var page = that.getPage(index);
-    that.loadOrder(orderList, index, '', page, '', '');
+    var search = "";
+    if (!search){
+      search = "";
+    }
+    that.loadOrder([], 0, search, normalPage, '', '');
+    that.loadOrder([], 1, search, timePage, 1, '');
+    that.loadOrder([], 2, search, pricePage, '', 1);
     wx.hideNavigationBarLoading();
     wx.stopPullDownRefresh();
   },
   /**
    * 点击导航栏
    */
+  onHide:function(){
+    wx.setStorageSync("search", "");
+  },
   onNavBarTap: function(event) {
     var that = this;
     // 获取点击的navbar的index
@@ -81,13 +112,18 @@ Page({
     //console.log(event.currentTarget.dataset.navbarIndex)
 
     //判断是否第一次打开时间或者价格页面
+    var search = wx.getStorageSync("search");
+    if (!search){
+      search = "";
+    }
     if (timePage == 1 && navbarTapIndex == 1) {
       var orderList = that.data.timeList;
-      that.loadOrder(orderList, 1, '', 1, '', '');
+      that.loadOrder(orderList, 1, '', 1, 1, '');
     }
     if (pricePage == 1 && navbarTapIndex == 2) {
       var orderList = that.data.priceList;
-      that.loadOrder(orderList, 2, '', 1, '', '');
+      that.resetOrderList(2);
+      that.loadOrder(orderList, 2, search, 1, '', 1);
     }
   },
 
@@ -135,6 +171,8 @@ Page({
 
   //参数说明orderList:传入需要push的list,index:操作的页面
   loadOrder(orderList, index, search, page, orderByTime, orderByPrice) {
+    console.log("151");
+    console.log(orderList,index,search,page,orderByTime,orderByPrice);
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -145,43 +183,54 @@ Page({
       data: {
         search: search, //可有可无
         page: page,
-        orderByTime: orderByTime, //1 or - 1 可有可无，1表示最新，- 1表示最久远, 创建日期
-        orderByPrice: orderByPrice, //同上，1为价格最高排序
+        orderByTime: String(orderByTime), //1 or - 1 可有可无，1表示最新，- 1表示最久远, 创建日期
+        orderByPrice: String(orderByPrice), //同上，1为价格最高排序
       },
       method: "GET",
       header: {
         'content-type': 'application/json', // 默认值
       },
       success(res) {
+        console.log("174");
         console.log(res);
         /*if (res.data.results.length>0){
           that.setData({
             have_order: true
           })
         }*/
+        var results = res.data.results;
         for (var i = 0; i < res.data.results.length; i++) {
-          orderList.push(res.data.results[i])
+        
           //字符串格式处理
-          orderList[i].createTime = util.formatTime(new Date(orderList[i].createTime));
-          orderList[i].expireDateTime = util.formatTime(new Date(orderList[i].expireDateTime));
-          orderList[i].money = (parseFloat(orderList[i].money)).toFixed(2);
+          results[i].createTime = util.formatTime(new Date(results[i].createTime));
+          results[i].expireDateTime = util.formatTime(new Date(results[i].expireDateTime));
+          results[i].money = (parseFloat(results[i].money)).toFixed(2);
         }
+        console.log("len(results):");
+        console.log(results.length);
+        orderList = results;
+        console.log("orderList");
+        console.log(orderList.length);
+        console.log(orderList);
         if (index == 0) {
           that.setData({
             normalList: orderList
           })
           normalPage = normalPage + 1;
           normalLength = res.data.results.length;
+          console.log(that.data.normalList);
         } else if (index == 1) {
           that.setData({
             timeList: orderList
           })
+          console.log(that.data.timeList);
           timePage = timePage + 1;
           timeLength = res.data.results.length;
         } else if (index == 2) {
           that.setData({
             priceList: orderList
           })
+          console.log(that.data.priceList);
           pricePage = pricePage + 1;
           priceLength = res.data.results.length;
         }
@@ -194,6 +243,10 @@ Page({
   loadMoreOrder() {
     var that = this;
     var index = that.data.navbarActiveIndex;
+    var search =wx.getStorageSync("search");
+    if (!search){
+      search = "";
+    }
     if (index == 0) {
       var flag = normalFlag;
       var length = normalLength;
@@ -217,11 +270,11 @@ Page({
         var orderList = that.getOrderList(index);
         //var page=that.setPage(index);
         if (index == 1) {
-          that.loadOrder(orderList, 1, '', timePage, 1, '');
+          that.loadOrder(orderList, 1, search, timePage, 1, '');
         } else if (index == 2) {
-          that.loadOrder(orderList, 2, '', pricePage, '', 1);
+          that.loadOrder(orderList, 2, search, pricePage, '', 1);
         } else if (index == 0) {
-          that.loadOrder(orderList, 0, '', normalPage, '', '');
+          that.loadOrder(orderList, 0,search, normalPage, '', '');
         }
       }
     }
@@ -323,22 +376,40 @@ Page({
       url: '/pages/news/orderInfo/orderInfo?order=' + order,
     })
   },*/
+  resetOrderList: function(index) {
+    var that = this;
+    if (index == 0) {
+      that.setData({
+        normalList: []
+      })
+    } else if (index == 1) {
+      that.setData({
+        timeList: []
+      })
+    } else if (index == 2) {
+      that.setData({
+        priceList: []
+      })
+    }
+  },
   submitSearch() { //未对page进行复位操作,PullDownRefresh时进行复位
     var that = this;
     var index = that.data.navbarActiveIndex;
     var orderList = that.getOrderList(index);
+    that.resetFlag_page_length(0);
+    that.resetFlag_page_length(1);
+    that.resetFlag_page_length(2);
     //var page=that.setPage(index);
     var search = that.data.inputValue;
+    console.log("search:"+search);
     if (search.length == 0) {
       //do nothing,搜索框文本内容为空
+      wx.setStorageSync("search","");
     } else {
-      if (index == 0) {
-        that.loadOrder(orderList, 1, search, normalPage, '', '');
-      } else if (index == 1) {
-        that.loadOrder(orderList, 2, search, timePage, 1, '');
-      } else if (index == 2) {
-        that.loadOrder(orderList, 3, search, pricePage, '', 1);
-      }
+      wx.setStorageSync("search", search);
+      that.loadOrder([], 0, search, normalPage, '', '');
+      that.loadOrder([], 1, search, timePage, 1, '');
+      that.loadOrder([], 2, search, pricePage, '', 1);
     }
     that.setData({
       inputValue:''

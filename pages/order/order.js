@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    defaultImg:app.globalData.imgUrl + "/static/matesHelps/account/img/default.jpg",
     navbarActiveIndex: 0,
     navbarTitle: [
       "已完成",
@@ -49,7 +50,13 @@ Page({
       navbarActiveIndex: navbarTapIndex
     })
   },
-
+  onPullDownRefresh:function(){
+    var page = getCurrentPages().pop();
+    if (page == undefined || page == null) return;
+    page.onLoad();
+    setTimeout(function(){wx.stopPullDownRefresh();},1000);
+    // wx.stopPullDownRefresh()
+  },
   /**
    * 
    */
@@ -220,8 +227,8 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.request({
-            // url: app.globalData.url + '/order/cancelOrder',
-            url: app.globalData.localUrl + '/order/cancelOrder',
+            url: app.globalData.url + '/order/cancelOrder',
+            // url: app.globalData.localUrl + '/order/cancelOrder',
             data: {
               orderid: orderid
             },

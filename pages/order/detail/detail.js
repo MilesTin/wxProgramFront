@@ -1,10 +1,12 @@
 // pages/order/detail/detail.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    defaultImg: app.globalData.imgUrl + "/static/matesHelps/account/img/default.jpg",
     item:[
       "已完成",
       "已取消",
