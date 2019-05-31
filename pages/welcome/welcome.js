@@ -10,7 +10,7 @@ Page({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           wx.switchTab({
-            url: '/pages/index/index',
+            url: '/pages/home/home',
             success: function (res) { },
             fail: function (res) { },
             complete: function (res) { },

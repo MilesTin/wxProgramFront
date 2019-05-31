@@ -123,8 +123,8 @@ Page({
         }
         //设置页面
         if(receivedList.length==0){
-          status=status-1;
-          var flag='flag['+status+']';
+          var index = status-1;
+          var flag='flag['+index+']';
           that.setData({
             [flag]:0
           })
