@@ -14,7 +14,7 @@ function sleep(n) {
 function getImg2(that) {
   that.setData({ "verifCodeUrl": "" });
   wx.downloadFile({
-    url: "http://129.28.140.83:81/static/matesHelps/account/img/login.jpg",
+    url: "https://milestin.xyz:81/static/matesHelps/account/img/login.jpg",
 
     success: function (res) {
       console.log(res);

@@ -59,3 +59,9 @@
   flex-direction: row;
   /* justify-content: space-between; */
 }
+
+.userinfo{
+  position: fixed;
+  bottom:50rpx;
+  margin-left:300rpx;
+}

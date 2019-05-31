@@ -23,4 +23,7 @@
       <image class='swiperImage' src="/img/home/toBeContinue.png" bindtap="" mode='widthFix'></image>
     </swiper-item>
   </swiper>
+
+
+
 </view>

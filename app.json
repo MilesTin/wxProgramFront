@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/welcome/welcome",
     "pages/home/home",
     "pages/news/orderInfo/orderInfo",
     "pages/order/comment/comment",
@@ -17,7 +18,7 @@
     "pages/mine/setting/setting",
     "pages/testApi/testApi",
     
-    "pages/welcome/welcome",
+    
     "pages/logs/logs",
     "pages/index/index",
 
