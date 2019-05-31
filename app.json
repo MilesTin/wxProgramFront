@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/news/orderInfo/orderInfo",
+    "pages/order/comment/comment",
+    "pages/order/getComment/getComment",
     "pages/news/news",
     "pages/order/order",
     "pages/order/send/send",
