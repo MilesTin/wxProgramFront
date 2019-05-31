@@ -2,10 +2,54 @@
 <view class='feedback-container'>
   <form bindsubmit='comment'>
     <view class='text-border'>
-      <textarea maxlength='{{maxlength}}' cursor='{{cursor}}' placeholder="请输入您的评价..." placeholder-style='color:#a0cdb4' bindinput='textInput' value='{{commentText}}' name='comment' style='font-size:40rpx;color:#66b075'>
+      <textarea maxlength='{{maxlength}}' cursor='{{cursor}}' placeholder="请输入您的评价..." placeholder-style='color:#1976d2' bindinput='textInput' value='{{commentText}}' name='comment' style='font-size:40rpx;color:#1976d2'>
       </textarea>
       <view class='feedback-remainder'>
         <text class="text-remainder">{{current_words}}/{{maxlength}}</text>
+      </view>
+    </view>
+    <view class="comment1-description">
+      <view class="star-pos" >
+        <view class="stars" bindtap="changeColor1">
+          <block wx:if="{{star==0}}">
+            <image class='img' src='/img/order/blackStar.png'></image>
+          </block>
+          <block wx:if="{{star>=1}}">
+            <image class='img' src='/img/order/yellowStar.png'></image>
+          </block>
+        </view>
+        <view class="stars" bindtap="changeColor2">
+          <block wx:if="{{star<2}}">
+            <image class='img' src='/img/order/blackStar.png'></image>
+          </block>
+          <block wx:if="{{star>=2}}">
+            <image class='img' src='/img/order/yellowStar.png'></image>
+          </block>
+        </view>
+        <view class="stars" bindtap="changeColor3">
+          <block wx:if="{{star<3}}">
+            <image class='img' src='/img/order/blackStar.png'></image>
+          </block>
+          <block wx:if="{{star>=3}}">
+            <image class='img' src='/img/order/yellowStar.png'></image>
+          </block>
+        </view>
+        <view class="stars" bindtap="changeColor4">
+          <block wx:if="{{star<4}}">
+            <image class='img' src='/img/order/blackStar.png'></image>
+          </block>
+          <block wx:if="{{star>=4}}">
+            <image class='img' src='/img/order/yellowStar.png'></image>
+          </block>
+        </view>
+        <view class="stars" bindtap="changeColor5">
+          <block wx:if="{{star<5}}">
+            <image class='img' src='/img/order/blackStar.png'></image>
+          </block>
+          <block wx:if="{{star>=5}}">
+            <image class='img' src='/img/order/yellowStar.png'></image>
+          </block>
+        </view>
       </view>
     </view>
     <button form-type='submit' disabled='{{disabled}}'>确定</button>

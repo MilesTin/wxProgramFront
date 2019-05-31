@@ -365,6 +365,7 @@ Page({
       }
     })
   },
+
   /*getOrderInfo(e) { //获得某个订单的更多信息，需要登录
     var that = this;
     //console.log(e.currentTarget.dataset.index);

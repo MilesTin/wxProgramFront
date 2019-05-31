@@ -1,2 +1,100 @@
 <!--pages/order/getComment/getComment.wxml-->
-<text>pages/order/getComment/getComment.wxml</text>
+<view class='container'>
+  <image class='mine-bg' src='/img/mine/mine-bg.png'></image>
+  <view id='talkbubble1' style='height:250rpx'>
+    <view class='text'> {{comment.owner_text}}</view>
+  </view>
+  <image class='headImg1' src='{{ownerImg}}'></image>
+  <view class="comment1-description">
+    <view class="star-pos">
+      <view class="stars">
+        <block wx:if="{{comment.owner_star==0}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.owner_star>=1}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.owner_star<2}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.owner_star>=2}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.owner_star<3}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.owner_star>=3}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.owner_star<4}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.owner_star>=4}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.owner_star<5}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.owner_star>=5}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view id='talkbubble2' style='height:250rpx'>
+    <view class='text'> {{comment.lancer_text}}</view>
+  </view>
+  <image class='headImg2' src='{{lancerImg}}'></image>
+  <view class="comment2-description">
+    <view class="star-pos">
+      <view class="stars">
+        <block wx:if="{{comment.lancer_star==0}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.lancer_star>=1}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.lancer_star<2}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.lancer_star>=2}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.lancer_star<3}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.lancer_star>=3}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.lancer_star<4}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.lancer_star>=4}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+      <view class="stars">
+        <block wx:if="{{comment.lancer_star<5}}">
+          <image class='img' src='/img/order/blackStar.png'></image>
+        </block>
+        <block wx:if="{{comment.lancer_star>=5}}">
+          <image class='img' src='/img/order/yellowStar.png'></image>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

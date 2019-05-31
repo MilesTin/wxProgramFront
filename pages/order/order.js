@@ -85,7 +85,7 @@ Page({
     }).exec()
   },
   loadOrder(status) {
-    console.log(status)
+    // console.log(status)
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -128,7 +128,7 @@ Page({
           that.setData({
             [flag]:0
           })
-          console.log(flag);
+          // console.log(flag);
         }
         if (status == 1) {
           var str = "list.completedList";
@@ -165,14 +165,14 @@ Page({
       var partList = that.data.list.expiredList;
       var str = "list.expiredList";
     }
-    console.log(partList);
+    // console.log(partList);
     for (var i = 0; i < partList.length; i++) {
       //对received中的order_owner进行处理
-      console.log(partList);
+      // console.log(partList);
       var receivedOrderOwnerTmp = partList[i].order_owner;
       if (receivedOrderOwnerTmp){
-        console.log("167");
-        console.log(receivedOrderOwnerTmp);
+        // console.log("167");
+        // console.log(receivedOrderOwnerTmp);
         receivedOrderOwnerTmp = receivedOrderOwnerTmp.split("'").join('"');
         receivedOrderOwnerTmp = JSON.parse(receivedOrderOwnerTmp);
       //console.log(receivedOrderOwnerTmp.head_img)
@@ -196,8 +196,8 @@ Page({
         that.setData({ [receivedFreeLancer]: receivedFreeLancerTmp });
       }
     }
-    console.log("line 185");
-    console.log(this.data);
+    // console.log("line 185");
+    // console.log(this.data);
     /*for (var i = 0; i < that.data.sendList.length; i++) {
       //对send中的order_owner进行处理
       var sendOrderOwnerTmp = that.data.sendList[i].order_owner;
@@ -272,7 +272,7 @@ Page({
   },
   completeOrder(e) {
     var that = this;
-    console.log(e.currentTarget.dataset.orderid);
+    // console.log(e.currentTarget.dataset.orderid);
     var orderid = e.currentTarget.dataset.orderid;
     wx.showModal({
       title: '提示',
@@ -290,7 +290,7 @@ Page({
               'Cookie': wx.getStorageSync('sessionid')
             },
             success(res) {
-              console.log(res.data.msg);
+              // console.log(res.data.msg);
               if (res.data.msg == '请联系订单主人后由主人确认') {
                 wx.showModal({
                   title: '提示',
@@ -346,7 +346,7 @@ Page({
   },
   toComment(e){
     var that=this;
-    console.log(e.currentTarget.dataset.orderid);
+    // console.log(e.currentTarget.dataset.orderid);
     var orderid = e.currentTarget.dataset.orderid;
     wx.navigateTo({
       url:'/pages/order/comment/comment?orderid='+orderid,
@@ -357,7 +357,7 @@ Page({
   },
   getComment(e){
     var that=this;
-    console.log(e.currentTarget.dataset.orderid);
+    // console.log(e.currentTarget.dataset.orderid);
     var orderid = e.currentTarget.dataset.orderid;
     wx.navigateTo({
       url: '/pages/order/getComment/getComment?orderid=' + orderid,

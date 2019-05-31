@@ -20,7 +20,7 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    console.log(options.index);
+    // console.log(options.index);
     var list=JSON.parse(options.list);
     //console.log(list);
     that.setData({

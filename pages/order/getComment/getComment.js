@@ -6,7 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    orderid: ''
+    ownerImg:'',
+    lancerImg:'',
+    orderid:'',
+    comment:"",
   },
 
   /**
@@ -16,7 +19,9 @@ Page({
     var that = this;
     console.log(options);
     that.setData({
-      orderid: options.orderid
+      orderid: options.orderid,
+      ownerImg: options.ownerImg,
+      lancerImg: options.lancerImg
     })
     that.getComment();
   },
@@ -69,20 +74,34 @@ Page({
   onShareAppMessage: function() {
 
   },
-  getComment() {
+  getComment(e) {
+    console.log(e);
     var that = this;
     wx.request({
       url: app.globalData.url + '/comment/getComment',
       data: {
-        orderid: that.data.orderid,
+        orderid: that.data.orderid
       },
       method: 'GET',
       header: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Contetn-Type': 'application/json',
         'Cookie': wx.getStorageSync('sessionid')
       },
       success(res) {
-        console.log(res);
+        console.log(res.data);
+        var comment = res.data.comment.replace(/\'/g, "\"");
+        console.log(comment);
+        comment = JSON.parse(comment);
+        console.log(comment);
+        if(comment.owner_text.length==0){
+          comment.owner_text="我还没有评价哦~";
+        }
+        if (comment.lancer_text.length == 0) {
+          comment.lancer_text = "我还没有评价哦~";
+        }
+        that.setData({
+          comment
+        })
       }
     })
   }

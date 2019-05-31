@@ -6,12 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    maxlength: 140,
+    maxlength: 100,
     cursor: -1,
     current_words: 0,
     commentText: "",
     disabled: true,
     orderid:'',
+    star:5
   },
   /**
    * 生命周期函数--监听页面加载
@@ -106,7 +107,7 @@ Page({
       url: app.globalData.url+'/comment/toComment',
       data:{
         orderid:that.data.orderid,
-        star:5,
+        star:that.data.star,
         text:e.detail.value.comment
       },
       method:'POST',
@@ -116,19 +117,20 @@ Page({
       },
       success(res) {
         that.setData({
-          feedback_text: ''
+          feedback_text: '',
+          star:that.data.star
         })
         console.log(res)
-        if(res.data.msg=="评价成功"){
+        if (res.statusCode == 200){
           wx.showToast({
             title: '评价成功',
             icon: 'succes',
             duration: 1000,
             mask: true
           })
-        }else if(res.data.msg=="你已评价"){
+        } else if (res.statusCode != 200){
           wx.showToast({
-            title: '请勿重复评价',
+            title: '评价失败',
             icon: 'none',
             duration: 1000,
             mask: true
@@ -141,5 +143,43 @@ Page({
           }, 1500)
       }
     })
+  },
+  changeColor1: function () {
+    var that = this;
+    if (that.data.star == 0 || that.data.star>1) {
+      that.setData({
+        star: 1
+      })
+    }
+    else if (that.data.star==1){
+      that.setData({
+        star: 0
+      })
+    }
+
+  },
+  changeColor2: function () {
+    var that = this;
+    that.setData({
+      star: 2
+    });
+  },
+  changeColor3: function () {
+    var that = this;
+    that.setData({
+      star: 3
+    });
+  },
+  changeColor4: function () {
+    var that = this;
+    that.setData({
+      star: 4
+    });
+  },
+  changeColor5: function () {
+    var that = this;
+    that.setData({
+      star: 5
+    });
   }
 })
