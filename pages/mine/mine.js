@@ -24,8 +24,8 @@ Page({
       url: app.globalData.url + "/account/myInfo",
       header:header,
       success:function(res){
-        console.log(typeof(res.data));
-        console.log(res.data);
+        // console.log(typeof(res.data));
+        // console.log(res.data);
         let data = res.data;
         data = data.split("'").join('"');
         console.log(data)

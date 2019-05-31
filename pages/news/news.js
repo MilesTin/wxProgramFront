@@ -43,7 +43,7 @@ Page({
   },
   onLoad: function(options) {
     var search = wx.getStorageSync("search");
-    console.log("search:"+search);
+    // console.log("search:"+search);
     var normalLength = 10;
     var timeLength = 10;
     var priceLength = 10;
@@ -155,7 +155,7 @@ Page({
       that.setData({
         scrollHeight: scrollHeight
       })
-      console.log(scrollHeight);
+      // console.log(scrollHeight);
     })
   },
 
@@ -171,8 +171,8 @@ Page({
 
   //参数说明orderList:传入需要push的list,index:操作的页面
   loadOrder(orderList, index, search, page, orderByTime, orderByPrice) {
-    console.log("151");
-    console.log(orderList,index,search,page,orderByTime,orderByPrice);
+    // console.log("151");
+    // console.log(orderList,index,search,page,orderByTime,orderByPrice);
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -191,8 +191,8 @@ Page({
         'content-type': 'application/json', // 默认值
       },
       success(res) {
-        console.log("174");
-        console.log(res);
+        // console.log("174");
+        // console.log(res);
         /*if (res.data.results.length>0){
           that.setData({
             have_order: true
@@ -206,31 +206,31 @@ Page({
           results[i].expireDateTime = util.formatTime(new Date(results[i].expireDateTime));
           results[i].money = (parseFloat(results[i].money)).toFixed(2);
         }
-        console.log("len(results):");
-        console.log(results.length);
+        // console.log("len(results):");
+        // console.log(results.length);
         orderList = results;
-        console.log("orderList");
-        console.log(orderList.length);
-        console.log(orderList);
+        // console.log("orderList");
+        // console.log(orderList.length);
+        // console.log(orderList);
         if (index == 0) {
           that.setData({
             normalList: orderList
           })
           normalPage = normalPage + 1;
           normalLength = res.data.results.length;
-          console.log(that.data.normalList);
+          // console.log(that.data.normalList);
         } else if (index == 1) {
           that.setData({
             timeList: orderList
           })
-          console.log(that.data.timeList);
+          // console.log(that.data.timeList);
           timePage = timePage + 1;
           timeLength = res.data.results.length;
         } else if (index == 2) {
           that.setData({
             priceList: orderList
           })
-          console.log(that.data.priceList);
+          // console.log(that.data.priceList);
           pricePage = pricePage + 1;
           priceLength = res.data.results.length;
         }
@@ -360,7 +360,7 @@ Page({
         console.log(res);
         var order=JSON.stringify(res.data.order);
         wx.navigateTo({
-          url: '/pages/news/orderInfo/orderInfo?order=' +order+'&received_pos='+received_pos,
+          url: 'orderInfo/orderInfo?order=' +order+'&received_pos='+received_pos,
         })
       }
     })
@@ -401,7 +401,7 @@ Page({
     that.resetFlag_page_length(2);
     //var page=that.setPage(index);
     var search = that.data.inputValue;
-    console.log("search:"+search);
+    // console.log("search:"+search);
     if (search.length == 0) {
       //do nothing,搜索框文本内容为空
       wx.setStorageSync("search","");

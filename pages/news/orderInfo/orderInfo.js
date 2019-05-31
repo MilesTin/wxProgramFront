@@ -6,7 +6,7 @@ Page({
   },
   onLoad: function(options) {
     var that = this;
-    console.log(options);
+    // console.log(options);
     var order = JSON.parse(options.order);
     order.received_pos = options.received_pos;
     that.handleOrder(order);
